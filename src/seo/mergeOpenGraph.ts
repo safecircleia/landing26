@@ -3,14 +3,14 @@ import type { Metadata } from 'next'
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
   description:
-    'Payload is a headless CMS and application framework built with TypeScript, Node.js, React and MongoDB',
+    'SafeCircle is a privacy-first digital safety platform designed to protect families and educational institutions online ',
   images: [
     {
       url: '/images/og-image.jpg',
     },
   ],
-  siteName: 'Payload',
-  title: 'Payload',
+  siteName: 'SafeCircle',
+  title: 'SafeCircle',
 }
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {

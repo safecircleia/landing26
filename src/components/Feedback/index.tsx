@@ -28,7 +28,7 @@ export const Feedback: React.FC<{ path: string; ref?: string }> = async ({
     <div className={classes.feedbackWrapper}>
       <Link
         className={classes.gitHubLink}
-        href={`https://github.com/payloadcms/payload/blob/${ref}/docs/${path}.mdx`}
+        href={`https://github.com/safecircleia/docs/blob/${ref}/docs/${path}.mdx`}
         target="_blank"
       >
         Edit this page on GitHub <ArrowIcon className={classes.arrow} />

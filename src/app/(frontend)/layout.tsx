@@ -19,7 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <head>
           <link href="/images/favicon.svg" rel="icon" />
           <link href={process.env.NEXT_PUBLIC_CLOUD_CMS_URL} rel="dns-prefetch" />
-          <link href="https://api.github.com/repos/payloadcms/payload" rel="dns-prefetch" />
+          <link href="https://api.github.com/repos/safecircleia/landing" rel="dns-prefetch" />
           <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
           <link href="https://www.googletagmanager.com" rel="preconnect" />
           <link href="https://www.google-analytics.com" rel="preconnect" />
@@ -42,6 +42,6 @@ export const metadata: Metadata = {
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    creator: '@toomas_ps',
   },
 }

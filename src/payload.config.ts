@@ -17,7 +17,6 @@ import link from '@root/fields/link'
 import { LabelFeature } from '@root/fields/richText/features/label/server'
 import { LargeBodyFeature } from '@root/fields/richText/features/largeBody/server'
 import { revalidateTag } from 'next/cache'
-import nodemailerSendgrid from 'nodemailer-sendgrid'
 import path from 'path'
 import { buildConfig, type TextField } from 'payload'
 import { fileURLToPath } from 'url'
@@ -83,20 +82,16 @@ import { refreshMdxToLexical, syncDocs } from './scripts/syncDocs'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const sendGridAPIKey = process.env.SENDGRID_API_KEY
+// const sendGridAPIKey = process.env.SENDGRID_API_KEY
 
-const sendgridConfig = {
-  transportOptions: nodemailerSendgrid({
-    apiKey: sendGridAPIKey,
-  }),
-}
+// const sendgridConfig = {
+//   transportOptions: nodemailerSendgrid({
+//     apiKey: sendGridAPIKey,
+//   }),
+// }
 
 export default buildConfig({
   admin: {
-    autoLogin: {
-      email: 'dev2@payloadcms.com',
-      password: 'test',
-    },
     components: {
       afterNavLinks: ['@root/components/AfterNavActions'],
     },
@@ -360,9 +355,17 @@ export default buildConfig({
     ],
   }),
   email: nodemailerAdapter({
-    defaultFromAddress: 'info@payloadcms.com',
-    defaultFromName: 'Payload',
-    ...sendgridConfig,
+    defaultFromAddress: 'hello@safecircle.tech',
+    defaultFromName: 'SafeCircle',
+    // Nodemailer transportOptions
+    transportOptions: {
+      auth: {
+        pass: process.env.SMTP_PASS,
+        user: process.env.SMTP_USER,
+      },
+      host: process.env.SMTP_HOST,
+      port: 587,
+    },
   }),
   endpoints: [
     {

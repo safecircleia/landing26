@@ -6,9 +6,9 @@ import React from 'react'
 
 import classes from './index.module.scss'
 
-const gitURL = 'https://github.com/payloadcms/payload'
+const gitURL = 'https://github.com/safecircleia/landing'
 
-const discordURL = 'https://discord.gg/FSn5QRdsbC'
+const discordURL = 'https://discord.gg/y53baqbgzV'
 
 export const DiscordGitCTA: React.FC<{ appearance?: 'default' | 'minimal' }> = ({ appearance }) => {
   return (
@@ -39,7 +39,7 @@ export const DiscordGitCTA: React.FC<{ appearance?: 'default' | 'minimal' }> = (
           <p className={classes.license}>
             Get dedicated engineering support{' '}
             <Link className={classes.button} href="/talk-to-us" prefetch={false}>
-              directly from the Payload team
+              directly from the SafeCircle team
             </Link>
             .
           </p>

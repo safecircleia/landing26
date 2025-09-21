@@ -19,7 +19,7 @@ export const redirects = async () => {
     },
     {
       source: '/roadmap',
-      destination: 'https://github.com/payloadcms/payload/discussions/categories/roadmap',
+      destination: 'https://github.com/safecircleai/docs/discussions/categories/roadmap',
       permanent: true,
     },
     {

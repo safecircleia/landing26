@@ -46,6 +46,6 @@ export const generateMetadata = async ({ params }: { params: Promise<{ category:
 
   return {
     description,
-    title: `${name} | Payload`,
+    title: `${name} | SafeCircle`,
   }
 }

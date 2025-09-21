@@ -83,10 +83,10 @@ export async function generateMetadata({
             },
           ]
         : undefined,
-      title: page?.meta?.title || 'Payload',
+      title: page?.meta?.title || 'Safecircle',
       url: Array.isArray(slug) ? slug.join('/') : '/',
     }),
-    title: page?.meta?.title || 'Payload',
+    title: page?.meta?.title || 'Safecircle',
     ...noIndexMeta, // Add noindex meta tag if noindex is true
   }
 }

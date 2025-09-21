@@ -272,7 +272,7 @@ export const MobileNav: React.FC<NavItems> = (props) => {
               className={[classes.menuBarContainer, 'cols-16 cols-m-8'].filter(Boolean).join(' ')}
             >
               <Link
-                aria-label="Full Payload Logo"
+                aria-label="Full SafeCircle Logo"
                 className={classes.logo}
                 href="/"
                 prefetch={false}
@@ -281,9 +281,9 @@ export const MobileNav: React.FC<NavItems> = (props) => {
               </Link>
               <div className={classes.icons}>
                 <a
-                  aria-label="Payload's GitHub"
+                  aria-label="SafeCircle's GitHub"
                   className={classes.github}
-                  href="https://github.com/payloadcms/payload"
+                  href="https://github.com/safecircleia/"
                   rel="noreferrer"
                   target="_blank"
                 >

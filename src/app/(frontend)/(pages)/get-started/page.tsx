@@ -104,9 +104,9 @@ export async function generateMetadata({
             },
           ]
         : undefined,
-      title: meta?.title || 'Payload',
+      title: meta?.title || 'Safecircle',
       url: Array.isArray(slug) ? slug.join('/') : '/',
     }),
-    title: meta?.title || 'Payload',
+    title: meta?.title || 'Safecircle',
   }
 }

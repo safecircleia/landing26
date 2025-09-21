@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    description: `${partner.name} is a official Payload Agency partner. Learn more about their services, ideal projects, and contributions to the Payload community.`,
-    title: `${partner.name} | Payload Partners`,
+    description: `${partner.name} is a official SafeCircle partner. Learn more about their services, ideal projects, and contributions to the SafeCircle community.`,
+    title: `${partner.name} | SafeCircle Partners`,
   }
 }
 
@@ -126,7 +126,7 @@ export default async function PartnerPage({ params }: { params: Promise<{ slug: 
           )}
           {projects && projects.length > 0 && (
             <div className={classes.projects}>
-              <h3>Built with Payload</h3>
+              <h3>Built with SafeCircle</h3>
               <div className={classes.projectTable}>
                 {projects.map((project, index) => (
                   <Link

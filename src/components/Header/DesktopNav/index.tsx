@@ -112,7 +112,12 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ hideBackground, menuCta, 
       >
         <div className={[classes.grid, 'grid'].join(' ')}>
           <div className={[classes.logo, 'cols-4'].join(' ')}>
-            <Link aria-label="Full Payload Logo" className={classes.logo} href="/" prefetch={false}>
+            <Link
+              aria-label="Full SafeCircle Logo"
+              className={classes.logo}
+              href="/"
+              prefetch={false}
+            >
               <FullLogo className="w-auto h-[30px]" />
             </Link>
           </div>
@@ -271,9 +276,9 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ hideBackground, menuCta, 
               className={[classes.secondaryNavItems, user !== undefined && classes.show].join(' ')}
             >
               <a
-                aria-label="Payload's GitHub"
+                aria-label="SafeCircle's GitHub"
                 className={classes.github}
-                href="https://github.com/payloadcms/payload"
+                href="https://github.com/safecircleai/"
                 rel="noreferrer"
                 target="_blank"
               >

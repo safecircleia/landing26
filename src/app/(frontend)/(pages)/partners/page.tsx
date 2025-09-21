@@ -16,8 +16,8 @@ import classes from './index.module.scss'
 
 export const metadata: Metadata = {
   description:
-    'Connect with a Payload expert to help you build, launch, and scale your digital products.',
-  title: 'Find a Payload Partner',
+    'Connect with a SafeCircle expert to help you.',
+  title: 'Find a SafeCircle Partner',
 }
 
 export default async function Partners() {
