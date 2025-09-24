@@ -253,7 +253,6 @@ export const hero: Field = {
           ['contentMedia', 'home'].includes(type) || (enableMedia && type === 'centeredContent'),
       },
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'secondaryMedia',
@@ -262,7 +261,6 @@ export const hero: Field = {
         condition: (_, { type }) => type === 'home',
       },
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'featureVideo',
@@ -271,7 +269,6 @@ export const hero: Field = {
         condition: (_, { type }) => ['home'].includes(type),
       },
       relationTo: 'media',
-      required: true,
     },
     {
       name: 'form',

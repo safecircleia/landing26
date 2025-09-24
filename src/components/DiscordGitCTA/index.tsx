@@ -6,7 +6,7 @@ import React from 'react'
 
 import classes from './index.module.scss'
 
-const gitURL = 'https://github.com/safecircleia/landing'
+const gitURL = 'https://github.com/safecircleia/demo'
 
 const discordURL = 'https://discord.gg/y53baqbgzV'
 

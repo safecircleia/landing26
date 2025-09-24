@@ -11,7 +11,7 @@ export const DiscordUsersPill: React.FC<{ className?: string }> = ({ className }
   React.useEffect(() => {
     const fetchDiscordElement = async () => {
       const res = await fetch(
-        'https://img.shields.io/discord/967097582721572934?label=Discord&color=5865F2&style=flat-square',
+        'https://img.shields.io/discord/1333394130931548211?label=Discord&color=5865F2&style=flat-square',
       )
       const svg = await res.text()
       const onlineUsers = svg.match(/<title.*?>(.*?)<\/title>/)?.[1]?.match(/(\d+(\.\d+)?k?)/i)?.[0]
