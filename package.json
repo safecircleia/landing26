@@ -1,6 +1,6 @@
 {
-  "name": "payload-website",
-  "version": "1.0.4",
+  "name": "safecircle-landing-payload",
+  "version": "10.0.0",
   "private": true,
   "type": "module",
   "scripts": {
