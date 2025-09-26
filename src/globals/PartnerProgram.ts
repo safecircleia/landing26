@@ -94,7 +94,7 @@ export const PartnerProgram: GlobalConfig = {
             ],
           },
           maxRows: 4,
-          minRows: 4,
+          minRows: 2,
           relationTo: 'partners',
           required: true,
         },

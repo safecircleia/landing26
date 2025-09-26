@@ -4,11 +4,11 @@ import type { Form as FormType } from '@root/payload-types'
 
 import { RichText } from '@components/RichText/index'
 import Form from '@forms/Form/index'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { CrosshairIcon } from '@root/icons/CrosshairIcon/index'
 import { getCookie } from '@root/utilities/get-cookie'
 import { usePathname, useRouter } from 'next/navigation'
 import * as React from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
 import { toast } from 'sonner'
 
 import { fields } from './fields'
@@ -48,7 +48,7 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
 
   const initialState = buildInitialState(form.fields)
 
-  const recaptcha = React.useRef<ReCAPTCHA>(null)
+  const turnstileRef = React.useRef<TurnstileInstance>(null)
 
   const router = useRouter()
 
@@ -61,11 +61,11 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
 
         setIsLoading(true)
 
-        const captchaValue = recaptcha.current ? recaptcha.current.getValue() : undefined
+        const captchaValue = turnstileRef.current ? turnstileRef.current.getResponse() : undefined
 
-        if (recaptcha && !captchaValue) {
+        if (turnstileRef.current && !captchaValue) {
           setIsLoading(false)
-          toast.error('Please complete the reCAPTCHA.')
+          toast.error('Please complete the verification.')
 
           return
         }
@@ -86,8 +86,8 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
               hubspotCookie,
               pageName,
               pageUri,
-              recaptcha: captchaValue,
               submissionData: dataToSend,
+              turnstile: captchaValue,
             }),
             credentials: 'include',
             headers: {
@@ -147,6 +147,13 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
     [router, formID, formRedirect, confirmationType, pathname],
   )
 
+  const handleSubmit = React.useCallback(
+    (data) => {
+      onSubmit(data)
+    },
+    [onSubmit],
+  )
+
   if (!form?.id) {
     return null
   }
@@ -159,10 +166,10 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
       {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
       {!hasSubmitted && (
         <React.Fragment>
-          <Form formId={formID} initialState={initialState} onSubmit={onSubmit}>
+          <Form formId={formID} initialState={initialState} onSubmit={handleSubmit}>
             <div className={classes.formFieldsWrap}>
               {form.fields?.map((field, index) => {
-                const Field: React.FC<any> = fields?.[field.blockType]
+                const Field: React.FC<Record<string, unknown>> = fields?.[field.blockType]
                 const isLastField = index === (form.fields?.length ?? 0) - 1
                 if (Field) {
                   return (
@@ -192,11 +199,10 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
               <CrosshairIcon className={[classes.crosshair, classes.crosshairLeft].join(' ')} />
             </div>
             <div className={classes.captchaWrap}>
-              <ReCAPTCHA
+              <Turnstile
                 className={classes.captcha}
-                ref={recaptcha}
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-                theme="dark"
+                ref={turnstileRef}
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
               />
             </div>
             <Submit

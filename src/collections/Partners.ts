@@ -202,7 +202,7 @@ export const Partners: CollectionConfig = {
                         width: '25%',
                         // description: ({ path, value }) => `github.com/payloadcms/${value || ''}`,
                       },
-                      defaultValue: 'payload',
+                      defaultValue: 'demo',
                       required: true,
                     },
                     {
@@ -238,7 +238,7 @@ export const Partners: CollectionConfig = {
                   required: true,
                 },
               ],
-              label: 'Projects built with Payload',
+              label: 'Projects built with SafeCircle',
               maxRows: 4,
             },
           ],

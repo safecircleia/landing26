@@ -1865,7 +1865,7 @@ export interface Form {
    * Attached to submission button to track clicks
    */
   customID?: string | null;
-  requireRecaptcha?: boolean | null;
+  requireTurnstile?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -3279,7 +3279,7 @@ export interface FormSubmission {
         id?: string | null;
       }[]
     | null;
-  recaptcha?: string | null;
+  turnstile?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -4030,7 +4030,7 @@ export interface FormsSelect<T extends boolean = true> {
       };
   hubSpotFormID?: T;
   customID?: T;
-  requireRecaptcha?: T;
+  requireTurnstile?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -4047,7 +4047,7 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
-  recaptcha?: T;
+  turnstile?: T;
   updatedAt?: T;
   createdAt?: T;
 }

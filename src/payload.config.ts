@@ -289,6 +289,7 @@ export default buildConfig({
     'https://payloadcms.com',
     'https://discord.com/api',
     'https://www.youtube.com/',
+    'https://analytics.tomasps.com',
   ].filter(Boolean),
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
@@ -415,12 +416,12 @@ export default buildConfig({
             label: 'Custom ID',
           },
           {
-            name: 'requireRecaptcha',
+            name: 'requireTurnstile',
             type: 'checkbox',
             admin: {
               position: 'sidebar',
             },
-            label: 'Require reCAPTCHA',
+            label: 'Require Cloudflare Turnstile',
           },
         ],
         hooks: {
@@ -436,7 +437,7 @@ export default buildConfig({
         fields: ({ defaultFields }) => [
           ...defaultFields,
           {
-            name: 'recaptcha',
+            name: 'turnstile',
             type: 'text',
             validate: async (value, { req, siblingData }) => {
               const form = await req.payload.findByID({
@@ -444,23 +445,25 @@ export default buildConfig({
                 collection: 'forms',
               })
 
-              if (!form?.requireRecaptcha) {
+              if (!form?.requireTurnstile) {
                 return true
               }
 
               if (!value) {
-                return 'Please complete the reCAPTCHA'
+                return 'Please complete the verification'
               }
 
-              const res = await fetch(
-                `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY}&response=${value}`,
-                {
-                  method: 'POST',
-                },
-              )
+              const formData = new FormData()
+              formData.append('secret', process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY || '')
+              formData.append('response', value)
+
+              const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+                body: formData,
+                method: 'POST',
+              })
               const data = await res.json()
               if (!data.success) {
-                return 'Invalid captcha'
+                return 'Invalid verification token'
               } else {
                 return true
               }

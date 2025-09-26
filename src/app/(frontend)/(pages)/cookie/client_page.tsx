@@ -179,57 +179,25 @@ export const CookieClientPage: React.FC = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td>_ga</td>
-                    <td>Performance: to store and count pageviews.</td>
-                    <td>2 years after the user’s visit</td>
-                    <td>Google</td>
+                    <td>umami.disabled</td>
+                    <td>Functional: to store user's opt-out preference.</td>
+                    <td>Persistent (until manually cleared)</td>
+                    <td>Umami (analytics.tomasps.com)</td>
                     <td>
-                      You can find out more information about Google Analytics cookies{' '}
-                      <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage">
-                        here
-                      </a>{' '}
-                      and about how Google protects your data{' '}
-                      <a href="https://marketingplatform.google.com/about/">here</a>. You can
-                      prevent the use of Google Analytics relating to your use of our Sites by
-                      downloading and installing a browser plugin available{' '}
-                      <a href="https://tools.google.com/dlpage/gaoptout?hl=en-GB">here</a>. See your
-                      choices’ section below.
+                      You can disable Umami analytics by visiting{' '}
+                      <a href="https://analytics.tomasps.com">analytics.tomasps.com</a> and opting
+                      out, or by disabling cookies in your browser. See your choices' section below.
                     </td>
                   </tr>
                   <tr>
-                    <td>_gcl_au</td>
-                    <td>Targeting/advertising: to store and track conversions.</td>
-                    <td>1 year after the user’s visit</td>
-                    <td>Google</td>
-                    <td>
-                      You can find out more information about Google Analytics cookies{' '}
-                      <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage">
-                        here
-                      </a>{' '}
-                      and about how Google protects your data{' '}
-                      <a href="https://marketingplatform.google.com/about/">here</a>. You can
-                      prevent the use of Google Analytics relating to your use of our Sites by
-                      downloading and installing a browser plugin available{' '}
-                      <a href="https://tools.google.com/dlpage/gaoptout?hl=en-GB">here</a>. See your
-                      choices’ section below.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>_gat_FLQ5THRMZQ</td>
-                    <td>Performance: to read and filter requests from bots</td>
+                    <td>umami.cache</td>
+                    <td>Performance: to store session data and reduce server requests.</td>
                     <td>Session cookie (expires when the user closes the browser)</td>
-                    <td>Google</td>
+                    <td>Umami (analytics.tomasps.com)</td>
                     <td>
-                      You can find out more information about Google Analytics cookies{' '}
-                      <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage">
-                        here
-                      </a>{' '}
-                      and about how Google protects your data{' '}
-                      <a href="https://marketingplatform.google.com/about/">here</a>. You can
-                      prevent the use of Google Analytics relating to your use of our Sites by
-                      downloading and installing a browser plugin available{' '}
-                      <a href="https://tools.google.com/dlpage/gaoptout?hl=en-GB">here</a>. See your
-                      choices’ section below.
+                      You can disable Umami analytics by visiting{' '}
+                      <a href="https://analytics.tomasps.com">analytics.tomasps.com</a> and opting
+                      out, or by disabling cookies in your browser. See your choices' section below.
                     </td>
                   </tr>
                 </tbody>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { GoogleAnalytics } from '@components/Analytics/GoogleAnalytics/index'
+import { UmamiAnalytics } from '@components/Analytics/UmamiAnalytics/index'
 import { GoogleTagManager } from '@components/Analytics/GoogleTagManager/index'
 import { PrivacyBanner } from '@components/PrivacyBanner/index'
 import { Providers } from '@providers/index'
@@ -21,9 +21,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <link href={process.env.NEXT_PUBLIC_CLOUD_CMS_URL} rel="dns-prefetch" />
           <link href="https://api.github.com/repos/safecircleia/demo" rel="dns-prefetch" />
           <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
-          <link href="https://www.googletagmanager.com" rel="preconnect" />
-          <link href="https://www.google-analytics.com" rel="preconnect" />
-          <GoogleAnalytics />
+          <link href="https://analytics.tomasps.com" rel="preconnect" />
+          <UmamiAnalytics />
         </head>
         <body className={[GeistMono.variable, untitledSans.variable].join(' ')}>
           <GoogleTagManager />
