@@ -76,19 +76,11 @@ const MobileNavItems = ({ setActiveTab, tabs }) => {
           )
         }
       })}
-
-      <Link
-        className={[classes.newProject, classes.mobileMenuItem].filter(Boolean).join(' ')}
-        href="/new"
-        prefetch={false}
-      >
-        New project
-      </Link>
-      {!user && (
+      {/* {!user && (
         <Link className={classes.mobileMenuItem} href="/login" prefetch={false}>
           Login
         </Link>
-      )}
+      )} */}
       <CrosshairIcon
         className={[classes.crosshair, classes.crosshairTopLeft].filter(Boolean).join(' ')}
         size="large"

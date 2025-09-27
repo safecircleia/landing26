@@ -52,7 +52,7 @@ export const GradientHero: React.FC<
             .join(' ')}
           height={1080}
           priority
-          src="/images/background-shapes.webp"
+          src="/images/background-shapes-new.webp"
           width={1920}
         />
       )}
@@ -99,7 +99,7 @@ export const GradientHero: React.FC<
               className={[classes.bgSquare, 'cols-8 start-9 start-m-1'].filter(Boolean).join(' ')}
               height={800}
               priority
-              src="/images/gradient-square.jpg"
+              src="/images/gradient-square-new.jpg"
               width={800}
             />
           )}

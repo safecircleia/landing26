@@ -13,16 +13,10 @@ This site showcases lots of cool stuff like how to use Next.js 15 + Payload's lo
 - Next.js 15 and its new App Router
 - SCSS Modules
 - MDX for docs, using the [Lexical MDX Converter](https://payloadcms.com/docs/rich-text/converting-markdown#converting-mdx)
-- GraphQL for Payload Cloud
-- Stripe for Payload Cloud
 
 ## ⭐ The CMS
 
 [Payload](https://github.com/payloadcms/payload) is leveraged for everything that this site does, outside of its documentation which is all stored as Markdown in the Payload repo on GitHub. Both the CMS and the website frontend are found within the same app folder.
-
-## ☁️ Payload Cloud
-
-This repo contains the source code for [Payload Cloud](https://payloadcms.com/cloud-pricing). This is a one-click integration to deploy production-ready instances of your Payload apps directly from your GitHub repo, [read the blog post](https://payloadcms.com/blog/launch-week-day-1-payload-cloud-is-here) to get all the details. The entire frontend of Payload Cloud has been built in public and is included within this repo 😱.
 
 ## 🚀 Running the project locally
 

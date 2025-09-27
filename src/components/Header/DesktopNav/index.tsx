@@ -285,17 +285,8 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ hideBackground, menuCta, 
                 <GitHubIcon />
                 {starCount}
               </a>
-              {user ? (
-                <Avatar className={classes.avatar} />
-              ) : (
-                <>
-                  <Link href="/login" prefetch={false}>
-                    Login
-                  </Link>
-                  {menuCta && menuCta.label && <CMSLink {...menuCta} className={classes.button} />}
-                </>
-              )}
-              <DocSearch />
+              {menuCta && menuCta.label && <CMSLink {...menuCta} className={classes.button} />}
+              {/* <DocSearch /> */}
             </div>
           </div>
         </div>

@@ -4,18 +4,13 @@ export const redirects = async () => {
   const staticRedirects = [
     {
       source: '/docs',
-      destination: '/docs/getting-started/what-is-payload',
+      destination: '/docs/getting-started/what-is-safecircle',
       permanent: true,
     },
     {
       source: '/docs/beta',
-      destination: '/docs/beta/getting-started/what-is-payload',
+      destination: '/docs/beta/getting-started/what-is-safecircle',
       permanent: false,
-    },
-    {
-      source: '/docs/v2',
-      destination: '/docs/v2/getting-started/what-is-payload',
-      permanent: true,
     },
     {
       source: '/roadmap',

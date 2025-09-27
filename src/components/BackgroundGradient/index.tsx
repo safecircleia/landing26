@@ -12,13 +12,7 @@ export default function BackgroundGradient(props: BackgroundGradientProps) {
   return (
     <div className={[className, classes.backgroundGradientWrapper].filter(Boolean).join(' ')}>
       <Suspense>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          src="https://l4wlsi8vxy8hre4v.public.blob.vercel-storage.com/video/glass-animation-5-f0gPcjmKFIV3ot5MGOdNy2r4QHBoXt.mp4"
-        />
+        <video autoPlay loop muted playsInline src="/images/glass-animation.mp4" />
       </Suspense>
     </div>
   )

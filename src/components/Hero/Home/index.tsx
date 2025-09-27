@@ -158,10 +158,10 @@ export const HomeHero: React.FC<
           <Media
             alt=""
             className={classes.desktopBg}
-            height={1644}
+            height={1920}
             priority
-            src="/images/hero-shapes.jpg"
-            width={1920}
+            src="/images/hero-shapes-new.jpg"
+            width={1644}
           />
           <Media
             alt=""
