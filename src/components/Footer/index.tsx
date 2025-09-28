@@ -14,6 +14,9 @@ import { validateEmail } from '@forms/validations'
 import { ArrowIcon } from '@icons/ArrowIcon/index'
 import { DiscordIcon } from '@root/graphics/DiscordIcon/index'
 import { FacebookIcon } from '@root/graphics/FacebookIcon/index'
+import { LinkedInIcon } from '@root/graphics/LinkedInIcon/index'
+import { MastodonIcon } from '@root/graphics/MastodonIcon/index'
+import { TelegramIcon } from '@root/graphics/TelegramIcon/index'
 import { InstagramIcon } from '@root/graphics/InstagramIcon/index'
 import { ThemeAutoIcon } from '@root/graphics/ThemeAutoIcon/index'
 import { ThemeDarkIcon } from '@root/graphics/ThemeDarkIcon/index'
@@ -167,6 +170,33 @@ export const Footer: React.FC<FooterType> = (props) => {
                 target="_blank"
               >
                 <InstagramIcon />
+              </a>
+              <a
+                aria-label="SafeCircle's LinkedIn page"
+                className={classes.socialIconLink}
+                href="https://www.linkedin.com/company/safecircleai/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <LinkedInIcon />
+              </a>
+              <a
+                aria-label="SafeCircle's Mastodon page"
+                className={classes.socialIconLink}
+                href="https://mastodon.social/@safecircle"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <MastodonIcon />
+              </a>
+              <a
+                aria-label="SafeCircle's Telegram"
+                className={classes.socialIconLink}
+                href="https://t.me/safecirclehub"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <TelegramIcon />
               </a>
             </div>
 
