@@ -389,6 +389,11 @@ export default buildConfig({
   graphQL: {
     disablePlaygroundInProduction: false,
   },
+  localization: {
+    defaultLocale: 'en',
+    fallback: true,
+    locales: ['en', 'fr', 'de', 'es', 'it', 'pt', 'ja', 'ko', 'zh'],
+  },
   plugins: [
     opsCounterPlugin({
       max: 200,
