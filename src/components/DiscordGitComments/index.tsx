@@ -1,8 +1,8 @@
-import type { Messages } from '@root/app/(frontend)/(pages)/community-help/(posts)/discord/[slug]/client_page'
+import type { Messages } from '@root/app/(frontend)/[locale]/community-help/(posts)/discord/[slug]/client_page'
 import type {
   Answer,
   Comment,
-} from '@root/app/(frontend)/(pages)/community-help/(posts)/github/[slug]/client_page'
+} from '@root/app/(frontend)/[locale]/community-help/(posts)/github/[slug]/client_page'
 
 import AuthorTag from '@components/AuthorTag/index'
 import { BackgroundScanline } from '@components/BackgroundScanline/index'

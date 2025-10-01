@@ -1,4 +1,4 @@
-import type { Attachments } from '@root/app/(frontend)/(pages)/community-help/(posts)/discord/[slug]/client_page'
+import type { Attachments } from '@root/app/(frontend)/[locale]/community-help/(posts)/discord/[slug]/client_page'
 
 import { DownloadIcon } from '@root/graphics/DownloadIcon/index'
 import Image from 'next/image'

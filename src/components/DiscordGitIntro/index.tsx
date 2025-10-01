@@ -1,4 +1,4 @@
-import type { Attachments } from '@root/app/(frontend)/(pages)/community-help/(posts)/discord/[slug]/client_page'
+import type { Attachments } from '@root/app/(frontend)/[locale]/community-help/(posts)/discord/[slug]/client_page'
 
 import AuthorTag from '@components/AuthorTag/index'
 import { DiscordGitBody } from '@components/DiscordGitBody/index'
