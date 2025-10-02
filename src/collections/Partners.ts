@@ -143,18 +143,21 @@ export const Partners: CollectionConfig = {
               name: 'overview',
               type: 'richText',
               label: 'Overview',
+              localized: true,
               required: true,
             },
             {
               name: 'services',
               type: 'richText',
               label: 'Services',
+              localized: true,
               required: true,
             },
             {
               name: 'idealProject',
               type: 'richText',
               label: 'Ideal Project',
+              localized: true,
               required: true,
             },
             {

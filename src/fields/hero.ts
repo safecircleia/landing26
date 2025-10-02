@@ -14,6 +14,7 @@ export const hero: Field = {
       type: 'select',
       defaultValue: 'default',
       label: 'Type',
+      localized: true,
       options: [
         {
           label: 'Default',
@@ -110,6 +111,7 @@ export const hero: Field = {
       admin: {
         condition: (_, { type } = {}) => type !== 'livestream',
       },
+      localized: true,
     },
     {
       name: 'description',
@@ -121,6 +123,7 @@ export const hero: Field = {
           type !== 'three' &&
           type !== 'homeNew',
       },
+      localized: true,
     },
     linkGroup({
       additions: {
@@ -141,6 +144,7 @@ export const hero: Field = {
       admin: {
         condition: (_, { type }) => ['home'].includes(type),
       },
+      localized: true,
     },
     {
       name: 'secondaryDescription',
@@ -148,6 +152,7 @@ export const hero: Field = {
       admin: {
         condition: (_, { type }) => type === 'home',
       },
+      localized: true,
     },
     linkGroup({
       overrides: {
@@ -164,6 +169,7 @@ export const hero: Field = {
         condition: (_, { type }) => type === 'three',
       },
       label: 'CTA?',
+      localized: true,
       options: [
         {
           label: 'Newsletter Sign Up',
@@ -188,6 +194,7 @@ export const hero: Field = {
           name: 'placeholder',
           type: 'text',
           admin: { placeholder: 'Enter your email' },
+          localized: true,
         },
         {
           name: 'description',
@@ -195,6 +202,7 @@ export const hero: Field = {
           admin: {
             placeholder: 'Sign up to receive periodic updates and feature releases to your email.',
           },
+          localized: true,
         },
       ],
     },

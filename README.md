@@ -1,98 +1,432 @@
-# Payload Website
+````markdown
+# SafeCircle Landing Page
 
-This is the repository for [Payload's official website](https://payloadcms.com/). It was built completely in public using Payload itself, [more on that here](#⭐-the-cms).
+A modern, high-performance landing page built with **Next.js 15**, **Payload CMS**, and **TypeScript**. This project showcases enterprise-level web development practices including headless CMS integration, advanced content management, and SEO optimization.
 
-<img src="https://payloadcms.com/images/og-image.jpg" alt="Payload headless CMS website" />
+<img src="https://payloadcms.com/images/og-image.jpg" alt="SafeCircle landing page" />
 
-This site showcases lots of cool stuff like how to use Next.js 15 + Payload's local API to its fullest extent, how to build a super dynamic light / dark mode into a Next site without any first-load flickering, how to render remotely stored docs from MDX to Next.js pages using just Payload (no external libraries), how to use Stripe to build a custom SaaS integration, and much more.
+## 🌟 Key Features
 
-## ✨ Tech stack
+- **Headless CMS**: Full content management powered by Payload CMS with custom collections and flexible content blocks
+- **Next.js 15**: Leveraging the latest App Router, Server Components, and React 19
+- **TypeScript**: Fully typed codebase for better developer experience and code quality
+- **Rich Content Blocks**: Modular content system with 30+ reusable blocks (CallToAction, CardGrid, MediaContent, Pricing, etc.)
+- **Documentation System**: Dynamic docs rendering from MDX/Markdown with automatic conversion to Lexical editor format
+- **SEO Optimized**: Built-in SEO plugin, sitemap generation, and structured data
+- **Form Builder**: Advanced form system with Cloudflare Turnstile verification and HubSpot integration
+- **Multi-language Support**: Internationalization ready with English, Spanish, and French locales
+- **Partner Management**: Complete partner directory with filterable categories
+- **Case Studies**: Showcase customer success stories with rich media and parallax effects
+- **Dark/Light Mode**: Sophisticated theme system without first-load flickering
+- **Search Integration**: Algolia-powered search with instant results
 
-- [Payload](https://github.com/payloadcms/payload) (obviously)
-- TypeScript
-- Next.js 15 and its new App Router
-- SCSS Modules
-- MDX for docs, using the [Lexical MDX Converter](https://payloadcms.com/docs/rich-text/converting-markdown#converting-mdx)
+## 🛠️ Tech Stack
 
-## ⭐ The CMS
+### Core Technologies
+- **[Payload CMS](https://github.com/payloadcms/payload)** `3.43.0` - Headless CMS with MongoDB adapter
+- **[Next.js](https://nextjs.org/)** `15.3.3` - React framework with App Router
+- **[React](https://react.dev/)** `19.1.0` - UI library
+- **[TypeScript](https://www.typescriptlang.org/)** `5.7.3` - Type-safe JavaScript
+- **[MongoDB](https://www.mongodb.com/)** - Database via Mongoose adapter
 
-[Payload](https://github.com/payloadcms/payload) is leveraged for everything that this site does, outside of its documentation which is all stored as Markdown in the Payload repo on GitHub. Both the CMS and the website frontend are found within the same app folder.
+### Content & Rich Text
+- **Lexical Editor** - Advanced rich text editing with custom features
+- **MDX Conversion** - Automatic markdown to Lexical conversion for docs
+- **Prism React Renderer** - Syntax highlighting for code blocks
+- **React Markdown** - Markdown rendering with GFM support
 
-## 🚀 Running the project locally
+### UI & Styling
+- **SCSS Modules** - Component-scoped styling
+- **Framer Motion** `12.0.0-alpha.2` - Advanced animations
+- **Radix UI** - Accessible component primitives (Accordion, Tabs, Portal)
+- **Faceless UI** - Custom UI components (Grid, Modal, Slider, Collapsibles)
+- **Geist Font** - Modern typography
 
-To get started with this repo locally, follow the steps below:
+### Search & Discovery
+- **Algolia** - Instant search with React InstantSearch
+- **@docsearch/react** - Documentation search widget
 
-- Clone the repo
-- `pnpm i`
-- Run `cp .env.example .env` to create an `.env` file
-- Fill out the values within your new `.env`, corresponding to your own environment
-- Run `pnpm dev`
-- Bam
+### Forms & Validation
+- **Payload Form Builder Plugin** - Dynamic form generation
+- **Cloudflare Turnstile** - Bot protection via @marsidev/react-turnstile
+- **React Select** - Enhanced select components
 
-### Hosts file
+### Integrations
+- **Stripe** - Payment processing for SaaS features
+- **HubSpot** - Form submission tracking
+- **Nodemailer** - Email with SendGrid transport
+- **Vercel Blob Storage** - Asset storage
+- **Facebook Pixel** - Analytics tracking
 
-The locally running app must run on `local.payloadcms.com:3000` because of http-only cookie policies and how the GitHub App redirects the user back to the site after authenticating. To do this, you'll need to add the following to your hosts file:
+### Developer Experience
+- **ESLint** - Code linting with Payload ESLint config
+- **Prettier** - Code formatting
+- **pnpm** - Fast, disk space efficient package manager
+- **Sharp** - High-performance image processing
+- **Next Bundle Analyzer** - Build size analysis
 
-```env
-127.0.0.1 local.payloadcms.com
+## 📁 Project Structure
+
+```
+landing26/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── (frontend)/        # Public-facing pages
+│   │   ├── (payload)/         # CMS admin routes
+│   │   └── api/               # API endpoints
+│   ├── blocks/                # Reusable content blocks
+│   │   ├── Banner/
+│   │   ├── BlogContent/
+│   │   ├── CallToAction/
+│   │   ├── CardGrid/
+│   │   ├── CaseStudyCards/
+│   │   ├── Pricing/
+│   │   └── ... (30+ blocks)
+│   ├── collections/           # Payload collections
+│   │   ├── CaseStudies.ts
+│   │   ├── Docs/
+│   │   ├── Media.ts
+│   │   ├── Pages.ts
+│   │   ├── Partners.ts
+│   │   ├── Posts.ts
+│   │   └── Users.ts
+│   ├── components/            # React components
+│   ├── fields/               # Custom Payload fields
+│   ├── globals/              # Global CMS configs
+│   │   ├── Footer.ts
+│   │   ├── MainMenu.ts
+│   │   └── TopBar.ts
+│   ├── hooks/                # React & Payload hooks
+│   ├── plugins/              # Custom Payload plugins
+│   ├── scripts/              # Utility scripts
+│   │   ├── syncDocs.ts       # GitHub docs sync
+│   │   └── redeployWebsite.ts
+│   └── payload.config.ts     # Payload configuration
+├── public/                    # Static assets
+│   ├── fonts/
+│   ├── images/
+│   └── robots.txt
+├── media/                     # Uploaded media files
+├── next.config.js            # Next.js configuration
+├── tsconfig.json             # TypeScript configuration
+└── package.json              # Dependencies
 ```
 
-> On Mac you can find the hosts file at `/etc/hosts`. On Windows, it's at `C:\Windows\System32\drivers\etc\hosts`:
+## ⭐ Content Management System
 
-### Documentation
+This project uses **Payload CMS** as a headless CMS, providing:
 
-The documentation for this site is stored in the [Payload repo](https://github.com/payloadcms/payload) as Markdown files. These are fetched when you press the "Sync Docs" button in the CMS. Pressing that button does the following:
+- **Collections**: Pages, Posts, Case Studies, Partners, Docs, Community Help, Media
+- **Global Configs**: Main Menu, Footer, Top Bar, Partner Program, Get Started
+- **Custom Blocks**: 30+ reusable content blocks for flexible page building
+- **Rich Text Editor**: Lexical-based editor with custom features (labels, large body, tables, uploads)
+- **Form Builder**: Dynamic form creation with validation and HubSpot integration
+- **Nested Docs**: Hierarchical documentation structure
+- **SEO Management**: Built-in SEO fields and metadata generation
+- **Redirects**: Automatic redirect management
+- **Media Management**: Vercel Blob storage integration with Sharp optimization
 
-1. Docs are pulled from the Payload repo on GitHub.
-2. The docs are converted from MDX to Lexical and stored in the CMS.
-3. The frontend docs pages are revalidated.
-4. Visiting the docs pages will pull the latest docs from the CMS, and render those lexical nodes to JSX.
+## 🚀 Getting Started
 
-#### Working on the docs locally - GitHub
+### Prerequisites
 
-By default, the docs are pulled from the `main` branch of the Payload repo on GitHub. You can **load the docs** for a different branch by opening the /docs/dynamic/ route on the website. This will dynamically load them every time you visit the page, without needing to sync them in the CMS.
+- **Node.js** 18.x or higher
+- **pnpm** (recommended) or npm
+- **MongoDB** database (local or cloud instance)
+- Optional: **Vercel** account for blob storage
 
-Example:
+### Installation
 
-- This pulls from the main branch: https://payloadcms.com/docs/getting-started/concepts
-- This pulls from the feat/myfeature branch: https://payloadcms.com/docs/dynamic/getting-started/concepts?branch=feat/myfeature
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd landing26
+   ```
 
-In order to edit docs for that branch without touching markdown files, you can use the branch selector in the CMS to select the branch you want to work on. After making changes and saving the document, the lexical docs will be converted to MDX and pushed to the selected branch on GitHub.
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
 
-You will need to set the following environment variables to work with the GitHub sync:
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Fill in your `.env` file with the following required values:
+   ```env
+   # Database
+   DATABASE_URI=mongodb://localhost:27017/safecircle
+   
+   # Payload
+   PAYLOAD_SECRET=your-secret-key-here
+   PAYLOAD_PUBLIC_APP_URL=http://localhost:3000
+   
+   # Email (SMTP)
+   SMTP_HOST=smtp.sendgrid.net
+   SMTP_USER=apikey
+   SMTP_PASS=your-sendgrid-api-key
+   
+   # Optional: Vercel Blob Storage
+   BLOB_STORAGE_ENABLED=false
+   BLOB_READ_WRITE_TOKEN=your-token
+   BLOB_STORE_ID=your-store-id
+   
+   # Optional: HubSpot
+   NEXT_PRIVATE_HUBSPOT_PORTAL_KEY=your-portal-key
+   
+   # Optional: Cloudflare Turnstile
+   NEXT_PRIVATE_TURNSTILE_SECRET_KEY=your-secret
+   
+   # Optional: GitHub (for docs sync)
+   GITHUB_ACCESS_TOKEN=ghp_your_token
+   GITHUB_CLIENT_SECRET=your_secret
+   ```
 
-```env
-// .env
-# For reading from GitHub
-GITHUB_ACCESS_TOKEN=ghp_
-GITHUB_CLIENT_SECRET=
-# For writing to GitHub - you can run the https://github.com/payloadcms/gh-commit repo locally
-COMMIT_DOCS_API_URL=
-COMMIT_DOCS_API_KEY=
+4. **Run database migrations**
+   ```bash
+   pnpm payload migrate
+   ```
+
+5. **Start the development server**
+   ```bash
+   pnpm dev
+   ```
+
+6. **Access the application**
+   - Frontend: http://localhost:3000
+   - CMS Admin: http://localhost:3000/admin
+
+## 📝 Available Scripts
+
+```bash
+# Development
+pnpm dev                    # Start Next.js dev server with Payload
+
+# Building
+pnpm build                  # Generate types, run migrations, build for production
+pnpm build:skipDocs        # Build without docs generation
+pnpm start                  # Start production server
+pnpm postbuild             # Generate sitemap after build
+
+# Type Generation
+pnpm generate:types         # Generate TypeScript types from Payload config
+pnpm generate:importmap     # Generate import map for Payload
+pnpm generate:llms          # Generate LLM-related content
+
+# Database
+pnpm payload migrate        # Run database migrations
+
+# Code Quality
+pnpm lint                   # Run ESLint
+pnpm prettier:fix          # Format code with Prettier
+
+# Analysis
+pnpm analyze               # Analyze bundle size with @next/bundle-analyzer
+
+# Utilities
+pnpm caddy                 # Run Caddy server (for local HTTPS)
 ```
 
-#### Working on docs locally - local markdown files
+## 🎨 Content Blocks
 
-If you have the docs stored locally as markdown files and would like to preview them in the website, you can use the /docs/local/ route in the website. First, you need to set the `DOCS_DIR_V3` environment variable to point to your local `docs` directory.
+This project includes 30+ reusable content blocks for flexible page composition:
 
+### Layout Blocks
+- **Banner** - Full-width announcement banners
+- **BlockSpacing** - Control spacing between sections
+- **ExtendedBackground** - Background that extends beyond container
+
+### Content Blocks
+- **Content** - Rich text content with media
+- **ContentGrid** - Multi-column content layout
+- **MediaContent** - Side-by-side media and content
+- **MediaContentAccordion** - Expandable content sections
+- **Statement** - Large testimonial or statement
+- **BlogContent** - Blog post content with formatting
+- **BlogMarkdown** - Markdown-based blog content
+
+### Interactive Blocks
+- **CallToAction** - Action-oriented sections with buttons
+- **Form** - Dynamic forms with validation
+- **HoverCards** - Cards with hover effects
+- **HoverHighlights** - Content sections that highlight on hover
+- **StickyHighlights** - Scroll-based sticky sections
+- **Slider** - Image/content carousel
+- **Accordion** - Expandable content sections
+
+### Display Blocks
+- **CardGrid** - Grid of cards
+- **LinkGrid** - Grid of links
+- **LogoGrid** - Partner/client logo display
+- **Pricing** - Pricing tables
+- **Steps** - Step-by-step processes
+- **ComparisonTable** - Feature comparison tables
+
+### Code & Technical
+- **Code** - Syntax-highlighted code blocks
+- **CodeFeature** - Code with feature highlights
+- **ExampleTabs** - Tabbed code examples
+- **Download** - Download buttons and assets
+- **CommandLine** - Terminal command displays
+
+### Case Studies & Portfolio
+- **CaseStudyCards** - Showcase case studies
+- **CaseStudiesHighlight** - Featured case studies
+- **CaseStudyParallax** - Parallax scrolling case studies
+
+### Specialized
+- **Media** - Images and videos
+- **ReusableContent** - Reusable content snippets
+- **Callout** - Important notices or tips
+
+## 📚 Documentation System
+
+The documentation system supports multiple workflows:
+
+### GitHub Sync
+1. Docs are pulled from a GitHub repository
+2. MDX is automatically converted to Lexical format
+3. Stored in the CMS for editing
+4. Can be pushed back to GitHub after CMS edits
+
+### Local Development
+Set `DOCS_DIR_V3` to your local docs directory:
 ```env
-// .env
-DOCS_DIR_V3=/documents/github/payload/docs
+DOCS_DIR_V3=/path/to/your/docs
 ```
 
-Then, just open the `/docs/local/` route: http://localhost:3000/docs/local/getting-started/concepts.
+Access via: http://localhost:3000/docs/local/your-doc-path
 
-Every time you make a change to the markdown files, just reload the page to see the changes reflected. The local MDX files are read, automatically converted to lexical on-the-fly, and rendered in the website. This process will not make any changes to the database.
+### Dynamic Loading
+Load docs from any branch without syncing:
+```
+/docs/dynamic/path?branch=feature-branch
+```
 
-#### Beta and Legacy environment flags
+## 🔌 API Endpoints
 
-You can also specify a `beta` version and `legacy` version to render different versions of the docs:
+Custom API endpoints are available for various operations:
 
-- Set the environment variable `NEXT_PUBLIC_ENABLE_BETA_DOCS` to `true` to enable the beta docs.
-- Specify a branch, commit, or tag with `NEXT_PUBLIC_BETA_DOCS_REF`. The default for the beta docs is `beta`.
-- Set the environment variable `NEXT_PUBLIC_ENABLE_LEGACY_DOCS` to `true` to enable the legacy docs.
-- Specify a branch, commit, or tag with `NEXT_PUBLIC_LEGACY_DOCS_REF`. The default for the legacy docs is `null`, and will fallback to the `main` branch.
+- `GET /api/sync/docs` - Sync documentation from GitHub
+- `POST /api/redeploy/website` - Trigger website redeployment
+- `GET /api/refresh/mdx-to-lexical` - Refresh MDX to Lexical conversion
 
-### License
+## 🎯 Key Features Explained
 
-The Payload website is available as open source under the terms of the [MIT license](https://github.com/payloadcms/website/blob/main/LICENSE).
+### Form Builder with HubSpot Integration
+- Custom form builder plugin
+- Cloudflare Turnstile bot protection
+- Automatic HubSpot submission
+- Custom validation and field types
+
+### SEO Optimization
+- Automatic sitemap generation via `next-sitemap`
+- SEO plugin for all collections
+- OpenGraph and Twitter card metadata
+- Structured data support
+
+### Multi-language Support
+- English, Spanish, and French locales
+- Fallback to default locale
+- Per-collection localization
+
+### Partner Management
+- Filterable partner directory
+- Categories: Industries, Specialties, Regions, Budgets
+- Rich profiles with case studies
+
+### Media Management
+- Vercel Blob storage integration
+- Sharp image optimization
+- Responsive image serving
+- CDN delivery
+
+### Authentication & Access Control
+- Custom access control functions
+- Admin-only routes
+- Published-only content filtering
+- Role-based permissions
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. **Connect your repository to Vercel**
+2. **Configure environment variables** in Vercel dashboard
+3. **Deploy** - automatic deployments on push to main
+
+### Environment Variables for Production
+```env
+NEXT_PUBLIC_IS_LIVE=true
+DATABASE_URI=your-production-mongodb-uri
+PAYLOAD_SECRET=your-production-secret
+BLOB_STORAGE_ENABLED=true
+BLOB_READ_WRITE_TOKEN=your-vercel-token
+```
+
+### Build Command
+```bash
+pnpm build
+```
+
+### Start Command
+```bash
+pnpm start
+```
+
+## 🧪 Development Tips
+
+### Custom Aliases
+The project uses path aliases for cleaner imports:
+- `@scss` → `./src/css/`
+- `@components` → `./src/components.js`
+- `@blocks` → `./src/blocks`
+- `@providers` → `./src/providers`
+- `@icons` → `./src/icons`
+- `@utilities` → `./src/utilities`
+- `@types` → `./payload-types.ts`
+- `@graphics` → `./src/graphics`
+
+### Bundle Analysis
+Run bundle analysis to optimize build size:
+```bash
+ANALYZE=true pnpm build
+```
+
+### Content Security
+The site includes security headers:
+- `X-Frame-Options: SAMEORIGIN`
+- Content Security Policy for object/form restrictions
+- X-Robots-Tag for non-production environments
+
+## 📖 Additional Resources
+
+- [Payload CMS Documentation](https://payloadcms.com/docs)
+- [Next.js 15 Documentation](https://nextjs.org/docs)
+- [Lexical Editor](https://lexical.dev/)
+- [Payload Form Builder](https://payloadcms.com/docs/plugins/form-builder)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is available as open source under the terms of the [MIT license](LICENSE).
+
+## 👥 Support
+
+For issues, questions, or contributions:
+- Open an issue in the repository
+- Contact: hello@safecircle.tech
+
+---
+
+Built with ❤️ using [Payload CMS](https://payloadcms.com/) and [Next.js](https://nextjs.org/)

@@ -35,6 +35,7 @@ export const CaseStudies: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
+      localized: true,
       required: true,
     },
     richText({
@@ -46,10 +47,12 @@ export const CaseStudies: CollectionConfig = {
         {
           name: 'industry',
           type: 'text',
+          localized: true,
         },
         {
           name: 'useCase',
           type: 'text',
+          localized: true,
         },
       ],
     },

@@ -20,6 +20,7 @@ const Filter: (slug: string, label: string) => CollectionConfig = (slug, label) 
         name: 'name',
         type: 'text',
         label: label + ' Label',
+        localized: true,
         required: true,
         unique: true,
       },

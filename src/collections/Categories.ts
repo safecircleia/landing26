@@ -25,6 +25,7 @@ export const Categories: CollectionConfig = {
             width: '50%',
           },
           label: 'Name',
+          localized: true,
           required: true,
         },
         {
@@ -34,6 +35,7 @@ export const Categories: CollectionConfig = {
             width: '50%',
           },
           label: 'Slug',
+          localized: true,
           required: true,
         },
       ],
@@ -42,6 +44,7 @@ export const Categories: CollectionConfig = {
       name: 'headline',
       type: 'text',
       label: 'Headline',
+      localized: true,
       required: true,
     },
     {
