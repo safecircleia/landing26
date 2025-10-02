@@ -12,6 +12,7 @@ const richText: RichText = (overrides = {}): RichTextField => {
   return {
     name: 'richText',
     type: 'richText',
+    localized: true,
     required: true,
     ...overridesToMerge,
   }

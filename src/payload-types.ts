@@ -183,7 +183,7 @@ export interface Config {
     'partner-program': PartnerProgramSelect<false> | PartnerProgramSelect<true>;
     topBar: TopBarSelect<false> | TopBarSelect<true>;
   };
-  locale: 'en' | 'fr' | 'de' | 'es' | 'it' | 'pt' | 'ja' | 'ko' | 'zh';
+  locale: 'en' | 'es' | 'fr';
   user: User & {
     collection: 'users';
   };

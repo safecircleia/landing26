@@ -17,4 +17,5 @@ export const addToDocs: Field = {
       },
     ],
   },
+  localized: true,
 }

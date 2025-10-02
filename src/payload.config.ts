@@ -390,9 +390,22 @@ export default buildConfig({
     disablePlaygroundInProduction: false,
   },
   localization: {
-    defaultLocale: 'en',
-    fallback: true,
-    locales: ['en', 'fr', 'de', 'es', 'it', 'pt', 'ja', 'ko', 'zh'],
+    defaultLocale: 'en', // required
+    fallback: true, // defaults to true
+    locales: [
+      {
+        code: 'en',
+        label: 'English',
+      },
+      {
+        code: 'es',
+        label: 'Spanish',
+      },
+      {
+        code: 'fr',
+        label: 'French',
+      },
+    ],
   },
   plugins: [
     opsCounterPlugin({

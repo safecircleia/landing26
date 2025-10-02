@@ -52,6 +52,7 @@ export const CardGrid: Block = {
               },
             }),
           ],
+          localized: true,
         },
       ],
     }),

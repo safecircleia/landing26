@@ -13,4 +13,5 @@ export const fullTitle: Field = {
   hooks: {
     beforeChange: [populateFullTitle],
   },
+  localized: true,
 }

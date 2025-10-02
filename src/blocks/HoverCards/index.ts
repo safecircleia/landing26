@@ -23,11 +23,13 @@ export const HoverCards: Block = {
             {
               name: 'title',
               type: 'text',
+              localized: true,
               required: true,
             },
             {
               name: 'description',
               type: 'textarea',
+              localized: true,
             },
             link({
               appearances: false,
