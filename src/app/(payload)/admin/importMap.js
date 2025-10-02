@@ -22,6 +22,7 @@ import { BlockquoteFeatureClient as BlockquoteFeatureClient_e70f5e05f09f93e00b99
 import { UploadFeatureClient as UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { LexicalEditorFeatureClient as LexicalEditorFeatureClient_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
 import { Code as Code_cde9948efbf07d34aa43b554148e9580 } from '@root/collections/Docs/blocks/code/CodeFields'
 import { codeConverterClient as codeConverterClient_0bb9c5d71ec6907af05ea02935a4786d } from '@root/collections/Docs/blocks/code/converterClient'
 import { LargeBodyFeatureClient as LargeBodyFeatureClient_857938bae8007dc0bc6c6922549383b8 } from '@root/fields/richText/features/largeBody/client'
@@ -34,13 +35,16 @@ import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c08
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { SaveButtonClient as SaveButtonClient_259d8f559cb11a4167281a913f510f62 } from '@root/collections/Docs/SaveButton'
 import { BranchButton as BranchButton_a056620e50cdeec34262a2e060477165 } from '@root/collections/Docs/BranchButton'
+import { ComposeField as ComposeField_c25bd927cd468b8e16d7bdb2cc282659 } from '@ai-stack/payloadcms/fields'
 import { Label as Label_087cde4d1fde05040831b5843a5fb654 } from '@root/fields/addToDocs/Label'
+import { SelectField as SelectField_c25bd927cd468b8e16d7bdb2cc282659 } from '@ai-stack/payloadcms/fields'
+import { PromptEditorField as PromptEditorField_c25bd927cd468b8e16d7bdb2cc282659 } from '@ai-stack/payloadcms/fields'
 import { default as default_7855b44454994335ecfbd19f80d2bb90 } from '@root/globals/CustomRowLabelNavItems'
 import { default as default_7b4b356d4f495796f5ea32368107862c } from '@root/globals/CustomRowLabelTabs'
 import { BlogMarkdownField as BlogMarkdownField_a0e4da4b38919785352cf36efa721675 } from '@root/blocks/BlogMarkdown/Field'
 import { default as default_26726ff2b18133c6c2dab451ecac5a3e } from '@root/components/TableCheckboxField'
 import { default as default_3ee709fabb34ea93648b8fdb9ee7323a } from '@root/components/AfterNavActions'
-import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from '@payloadcms/storage-vercel-blob/client'
+import { InstructionsProvider as InstructionsProvider_4490b89d4413c1ffaecdacfe72efaf73 } from '@ai-stack/payloadcms/client'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -67,6 +71,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UploadFeatureClient": UploadFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@ai-stack/payloadcms/client#LexicalEditorFeatureClient": LexicalEditorFeatureClient_4490b89d4413c1ffaecdacfe72efaf73,
   "@root/collections/Docs/blocks/code/CodeFields#Code": Code_cde9948efbf07d34aa43b554148e9580,
   "@root/collections/Docs/blocks/code/converterClient#codeConverterClient": codeConverterClient_0bb9c5d71ec6907af05ea02935a4786d,
   "@root/fields/richText/features/largeBody/client#LargeBodyFeatureClient": LargeBodyFeatureClient_857938bae8007dc0bc6c6922549383b8,
@@ -79,11 +84,14 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@root/collections/Docs/SaveButton#SaveButtonClient": SaveButtonClient_259d8f559cb11a4167281a913f510f62,
   "@root/collections/Docs/BranchButton#BranchButton": BranchButton_a056620e50cdeec34262a2e060477165,
+  "@ai-stack/payloadcms/fields#ComposeField": ComposeField_c25bd927cd468b8e16d7bdb2cc282659,
   "@root/fields/addToDocs/Label#Label": Label_087cde4d1fde05040831b5843a5fb654,
+  "@ai-stack/payloadcms/fields#SelectField": SelectField_c25bd927cd468b8e16d7bdb2cc282659,
+  "@ai-stack/payloadcms/fields#PromptEditorField": PromptEditorField_c25bd927cd468b8e16d7bdb2cc282659,
   "@root/globals/CustomRowLabelNavItems#default": default_7855b44454994335ecfbd19f80d2bb90,
   "@root/globals/CustomRowLabelTabs#default": default_7b4b356d4f495796f5ea32368107862c,
   "@root/blocks/BlogMarkdown/Field#BlogMarkdownField": BlogMarkdownField_a0e4da4b38919785352cf36efa721675,
   "@root/components/TableCheckboxField#default": default_26726ff2b18133c6c2dab451ecac5a3e,
   "@root/components/AfterNavActions#default": default_3ee709fabb34ea93648b8fdb9ee7323a,
-  "@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler": VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e
+  "@ai-stack/payloadcms/client#InstructionsProvider": InstructionsProvider_4490b89d4413c1ffaecdacfe72efaf73
 }

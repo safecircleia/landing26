@@ -1,3 +1,4 @@
+import { payloadAiPlugin, PayloadAiPluginLexicalEditorFeature } from '@ai-stack/payloadcms'
 import { revalidateRedirects } from '@hooks/revalidateRedirects'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
@@ -12,7 +13,6 @@ import {
   LinkFeature,
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import link from '@root/fields/link'
 import { LabelFeature } from '@root/fields/richText/features/label/server'
 import { LargeBodyFeature } from '@root/fields/richText/features/largeBody/server'
@@ -70,6 +70,7 @@ import { Partners } from './collections/Partners'
 import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
+import { openrouterTextModel } from './custom-models/openrouter'
 import { Footer } from './globals/Footer'
 import { GetStarted } from './globals/GetStarted'
 import { MainMenu } from './globals/MainMenu'
@@ -297,7 +298,8 @@ export default buildConfig({
   defaultDepth: 1,
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
-      ...defaultFeatures.filter((feature) => feature.key !== 'link'),
+      PayloadAiPluginLexicalEditorFeature(),
+      ...defaultFeatures,
       LinkFeature({
         fields({ defaultFields }) {
           return [
@@ -552,15 +554,20 @@ export default buildConfig({
         },
       },
     }),
-    vercelBlobStorage({
-      cacheControlMaxAge: 60 * 60 * 24 * 365, // 1 year
+    payloadAiPlugin({
       collections: {
-        media: {
-          generateFileURL: ({ filename }) => `https://${process.env.BLOB_STORE_ID}/${filename}`,
-        },
+        [CaseStudies.slug]: true,
+        [CommunityHelp.slug]: true,
+        [Docs.slug]: true,
+        [Pages.slug]: true,
+        [Posts.slug]: true,
+        [ReusableContent.slug]: true,
       },
-      enabled: Boolean(process.env.BLOB_STORAGE_ENABLED) || false,
-      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+      debugging: false,
+      disableSponsorMessage: true,
+      generationModels(defaultModels) {
+        return [...defaultModels, openrouterTextModel]
+      },
     }),
   ],
   secret: process.env.PAYLOAD_SECRET || '',
