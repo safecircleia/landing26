@@ -110,18 +110,31 @@ export const fetchPage = async (
   const pagePath = `/${slugSegments.join('/')}`
 
   const page = data.docs.find(({ breadcrumbs }: Page) => {
-    if (!breadcrumbs) {
+    if (!breadcrumbs || breadcrumbs.length === 0) {
       return false
     }
-    const { url } = breadcrumbs[breadcrumbs.length - 1]
-    return url === pagePath
+    const lastBreadcrumb = breadcrumbs[breadcrumbs.length - 1]
+    if (!lastBreadcrumb || !lastBreadcrumb.url) {
+      return false
+    }
+    const { url } = lastBreadcrumb
+    // Match both with and without locale prefix
+    return (
+      url === pagePath ||
+      url === `/${locale}${pagePath}` ||
+      url === pagePath.replace(`/${locale}`, '')
+    )
   })
 
   if (page) {
     return page
   }
 
-  return null
+  // If no page found through breadcrumbs matching, try to find by slug directly
+  // This is a fallback for pages that might not have proper breadcrumbs set up
+  const fallbackPage = data.docs.find(({ slug: pageSlug }: Page) => pageSlug === slug)
+
+  return fallbackPage || null
 }
 
 export const fetchPages = async (locale: TypedLocale = 'en'): Promise<Partial<Page>[]> => {
