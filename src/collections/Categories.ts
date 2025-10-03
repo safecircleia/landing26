@@ -51,6 +51,7 @@ export const Categories: CollectionConfig = {
       name: 'description',
       type: 'textarea',
       label: 'Description',
+      localized: true,
       required: true,
     },
     {

@@ -47,6 +47,7 @@ export const ExampleTabs: Block = {
         {
           name: 'label',
           type: 'text',
+          localized: true,
           required: true,
         },
         {

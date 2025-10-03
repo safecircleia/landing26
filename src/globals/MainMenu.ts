@@ -24,6 +24,7 @@ export const MainMenu: GlobalConfig = {
         {
           name: 'label',
           type: 'text',
+          localized: true,
           required: true,
         },
         {
@@ -61,6 +62,7 @@ export const MainMenu: GlobalConfig = {
             {
               name: 'description',
               type: 'textarea',
+              localized: true,
             },
             {
               name: 'descriptionLinks',
@@ -118,6 +120,7 @@ export const MainMenu: GlobalConfig = {
                     {
                       name: 'description',
                       type: 'textarea',
+                      localized: true,
                     },
                   ],
                 },
@@ -131,10 +134,12 @@ export const MainMenu: GlobalConfig = {
                     {
                       name: 'tag',
                       type: 'text',
+                      localized: true,
                     },
                     {
                       name: 'label',
                       type: 'richText',
+                      localized: true,
                     },
                     {
                       name: 'links',
@@ -160,6 +165,7 @@ export const MainMenu: GlobalConfig = {
                     {
                       name: 'tag',
                       type: 'text',
+                      localized: true,
                     },
                     {
                       name: 'links',

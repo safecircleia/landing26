@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
-import { UmamiAnalytics } from '@components/Analytics/UmamiAnalytics/index'
 import { GoogleTagManager } from '@components/Analytics/GoogleTagManager/index'
+import { UmamiAnalytics } from '@components/Analytics/UmamiAnalytics/index'
 import { PrivacyBanner } from '@components/PrivacyBanner/index'
 import { Providers } from '@providers/index'
 import { PrivacyProvider } from '@root/providers/Privacy/index'
@@ -12,9 +12,15 @@ import React from 'react'
 import { untitledSans } from './fonts'
 import '../../css/app.scss'
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+  params: { lang },
+}: {
+  children: React.ReactNode
+  params: { lang: string }
+}) {
   return (
-    <html lang="en">
+    <html lang={lang}>
       <PrivacyProvider>
         <head>
           <link href="/images/favicon.svg" rel="icon" />

@@ -132,7 +132,6 @@ export interface Config {
     forms: Form;
     'form-submissions': FormSubmission;
     redirects: Redirect;
-    'plugin-ai-instructions': PluginAiInstruction;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -163,7 +162,6 @@ export interface Config {
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
-    'plugin-ai-instructions': PluginAiInstructionsSelect<false> | PluginAiInstructionsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -3314,50 +3312,6 @@ export interface Redirect {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "plugin-ai-instructions".
- */
-export interface PluginAiInstruction {
-  id: string;
-  /**
-   * Please don't change this unless you're sure of what you're doing
-   */
-  'schema-path'?: string | null;
-  /**
-   * Please don't change this unless you're sure of what you're doing
-   */
-  'field-type'?: ('text' | 'textarea' | 'upload' | 'richText') | null;
-  'relation-to'?: string | null;
-  'model-id'?: 'openrouter-text' | null;
-  /**
-   * Click 'Compose' to run this custom prompt and generate content
-   */
-  prompt?: string | null;
-  images?:
-    | {
-        /**
-         * Please make sure the image is publicly accessible.
-         */
-        image?: (string | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
-  system?: string | null;
-  layout?: string | null;
-  'openrouter-text-settings'?: {
-    model?:
-      | (
-          | 'meta-llama/llama-3.3-70b-instruct'
-          | 'openai/gpt-4o-mini'
-          | 'anthropic/claude-3.5-sonnet'
-          | 'google/gemini-2.0-flash-001'
-        )
-      | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -3430,10 +3384,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'redirects';
         value: string | Redirect;
-      } | null)
-    | ({
-        relationTo: 'plugin-ai-instructions';
-        value: string | PluginAiInstruction;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -4113,32 +4063,6 @@ export interface RedirectsSelect<T extends boolean = true> {
         type?: T;
         reference?: T;
         url?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "plugin-ai-instructions_select".
- */
-export interface PluginAiInstructionsSelect<T extends boolean = true> {
-  'schema-path'?: T;
-  'field-type'?: T;
-  'relation-to'?: T;
-  'model-id'?: T;
-  prompt?: T;
-  images?:
-    | T
-    | {
-        image?: T;
-        id?: T;
-      };
-  system?: T;
-  layout?: T;
-  'openrouter-text-settings'?:
-    | T
-    | {
-        model?: T;
       };
   updatedAt?: T;
   createdAt?: T;

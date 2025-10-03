@@ -107,6 +107,7 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
             width: '25%',
           },
           label: 'Label',
+          localized: true,
           required: true,
         },
         {

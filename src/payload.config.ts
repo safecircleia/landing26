@@ -1,4 +1,3 @@
-import { payloadAiPlugin, PayloadAiPluginLexicalEditorFeature } from '@ai-stack/payloadcms'
 import { revalidateRedirects } from '@hooks/revalidateRedirects'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
@@ -13,6 +12,9 @@ import {
   LinkFeature,
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
+import { en } from '@payloadcms/translations/languages/en'
+import { es } from '@payloadcms/translations/languages/es'
+import { fr } from '@payloadcms/translations/languages/fr'
 import link from '@root/fields/link'
 import { LabelFeature } from '@root/fields/richText/features/label/server'
 import { LargeBodyFeature } from '@root/fields/richText/features/largeBody/server'
@@ -70,7 +72,6 @@ import { Partners } from './collections/Partners'
 import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
-import { openrouterTextModel } from './custom-models/openrouter'
 import { Footer } from './globals/Footer'
 import { GetStarted } from './globals/GetStarted'
 import { MainMenu } from './globals/MainMenu'
@@ -298,8 +299,7 @@ export default buildConfig({
   defaultDepth: 1,
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
-      PayloadAiPluginLexicalEditorFeature(),
-      ...defaultFeatures,
+      ...defaultFeatures.filter((feature) => feature.key !== 'link'),
       LinkFeature({
         fields({ defaultFields }) {
           return [
@@ -390,6 +390,10 @@ export default buildConfig({
   globals: [Footer, MainMenu, GetStarted, PartnerProgram, TopBar],
   graphQL: {
     disablePlaygroundInProduction: false,
+  },
+  i18n: {
+    fallbackLanguage: 'en',
+    supportedLanguages: { en, es, fr },
   },
   localization: {
     defaultLocale: 'en', // required
@@ -552,21 +556,6 @@ export default buildConfig({
         hooks: {
           afterChange: [revalidateRedirects],
         },
-      },
-    }),
-    payloadAiPlugin({
-      collections: {
-        [CaseStudies.slug]: true,
-        [CommunityHelp.slug]: true,
-        [Docs.slug]: true,
-        [Pages.slug]: true,
-        [Posts.slug]: true,
-        [ReusableContent.slug]: true,
-      },
-      debugging: false,
-      disableSponsorMessage: true,
-      generationModels(defaultModels) {
-        return [...defaultModels, openrouterTextModel]
       },
     }),
   ],

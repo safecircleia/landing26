@@ -1,5 +1,6 @@
 import type { Media } from '@root/payload-types'
 import type { Metadata } from 'next'
+import type { TypedLocale } from 'payload'
 
 import { Hero } from '@components/Hero/index'
 import { PayloadRedirects } from '@components/PayloadRedirects'
@@ -11,21 +12,44 @@ import { unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
 import React from 'react'
 
-const getPage = async (slug, draft?) =>
-  draft ? fetchPage(slug) : unstable_cache(fetchPage, [`page-${slug}`])(slug)
+// Alternative approach using getPayload directly:
+// import { getPayload } from 'payload'
+// const payload = await getPayload()
+// const { docs: [data] } = await payload.find({
+//   collection: "pages",
+//   where: { slug: "learn" },
+//   locale: lang,
+// })
+
+const getPage = async (slug: string[] | undefined, locale: TypedLocale, draft?: boolean) => {
+  const slugPath = slug && Array.isArray(slug) ? slug.join('/') : 'home'
+  const slugParam = slug || ['home']
+  return draft
+    ? fetchPage(slugParam, locale)
+    : unstable_cache(fetchPage, [`page-${slugPath}-${locale}`])(slugParam, locale)
+}
 
 const Page = async ({
   params,
 }: {
   params: Promise<{
-    slug: any
+    locale: string
+    slug?: string[]
   }>
 }) => {
   const { isEnabled: draft } = await draftMode()
-  const { slug } = await params
-  const url = '/' + (Array.isArray(slug) ? slug.join('/') : slug)
+  const { slug, locale } = await params
+  const url = '/' + (Array.isArray(slug) ? slug.join('/') : slug || '')
 
-  const page = await getPage(slug, draft)
+  const page = await getPage(slug, locale as TypedLocale, draft)
+
+  // Alternative: Query for a specific page directly using getPayload
+  // const payload = await getPayload({ config })
+  // const { docs: [data] } = await payload.find({
+  //   collection: "pages",
+  //   where: { slug: "your-specific-slug" },
+  //   locale: lang as TypedLocale,
+  // })
 
   if (!page) {
     return <PayloadRedirects url={url} />
@@ -56,12 +80,13 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{
-    slug: any
+    locale: string
+    slug?: string[]
   }>
 }): Promise<Metadata> {
-  const { slug } = await params
+  const { slug, locale } = await params
   const { isEnabled: draft } = await draftMode()
-  const page = await getPage(slug, draft)
+  const page = await getPage(slug, locale as TypedLocale, draft)
 
   let ogImage: Media | null = null
 

@@ -87,6 +87,7 @@ export const Pages: CollectionConfig = {
                 'exampleTabs',
               ],
               blocks: [],
+              localized: true,
               required: true,
             },
           ],

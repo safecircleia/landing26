@@ -1,3 +1,5 @@
+import type { TypedLocale } from 'payload'
+
 import { Footer } from '@components/Footer/index'
 import { Header } from '@components/Header/index'
 import { TopBar } from '@components/TopBar'
@@ -8,13 +10,21 @@ import React from 'react'
 
 export const dynamic = 'force-static'
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
+}) {
   const { isEnabled: draft } = await draftMode()
+  const { locale } = await params
+
   const getGlobals = draft
     ? fetchGlobals
-    : unstable_cache(fetchGlobals, ['globals', 'mainMenu', 'footer'])
+    : unstable_cache(fetchGlobals, ['globals', 'mainMenu', 'footer', locale])
 
-  const { footer, mainMenu, topBar } = await getGlobals()
+  const { footer, mainMenu, topBar } = await getGlobals(locale as TypedLocale)
 
   return (
     <React.Fragment>

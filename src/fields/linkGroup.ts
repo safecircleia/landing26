@@ -33,6 +33,7 @@ const additionalFields: Field[] = [
       {
         name: 'label',
         type: 'text',
+        localized: true,
         required: true,
       },
     ],

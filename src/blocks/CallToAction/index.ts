@@ -33,6 +33,7 @@ export const CallToAction: Block = {
           admin: {
             condition: (_, { style }) => style === 'buttons',
           },
+          localized: true,
         },
         linkGroup({
           additions: {

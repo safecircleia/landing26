@@ -18,6 +18,7 @@ export const TopBar: GlobalConfig = {
         condition: (_, siblingData) => siblingData.enableTopBar,
       },
       label: 'Message',
+      localized: true,
       required: true,
     },
     link({
