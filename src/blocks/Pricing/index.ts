@@ -16,6 +16,7 @@ export const Pricing: Block = {
             {
               name: 'name',
               type: 'text',
+              localized: true,
               required: true,
             },
             {
@@ -42,11 +43,13 @@ export const Pricing: Block = {
                 condition: (_, { hasPrice }) => !hasPrice,
               },
               label: 'Title',
+              localized: true,
               required: true,
             },
             {
               name: 'description',
               type: 'textarea',
+              localized: true,
             },
             {
               name: 'enableLink',
@@ -82,6 +85,7 @@ export const Pricing: Block = {
                   name: 'feature',
                   type: 'text',
                   label: false,
+                  localized: true,
                 },
               ],
             },
@@ -92,6 +96,7 @@ export const Pricing: Block = {
         {
           name: 'disclaimer',
           type: 'text',
+          localized: true,
         },
       ],
     }),

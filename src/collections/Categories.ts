@@ -70,19 +70,28 @@ export const Categories: CollectionConfig = {
   },
   hooks: {
     afterChange: [
-      async ({ doc, previousDoc }) => {
+      ({ doc, previousDoc }) => {
         revalidatePath(`/posts/${doc.slug}`)
         revalidateTag('archives')
+        revalidateTag(`${doc.slug}-archive-en`)
+        revalidateTag(`${doc.slug}-archive-es`)
+        revalidateTag(`${doc.slug}-archive-fr`)
 
-        if (doc.slug !== previousDoc?.slug) {
-          revalidatePath(`/posts/${previousDoc?.slug}`)
+        if (doc.slug !== previousDoc?.slug && previousDoc?.slug) {
+          revalidatePath(`/posts/${previousDoc.slug}`)
+          revalidateTag(`${previousDoc.slug}-archive-en`)
+          revalidateTag(`${previousDoc.slug}-archive-es`)
+          revalidateTag(`${previousDoc.slug}-archive-fr`)
         }
       },
     ],
     afterDelete: [
-      async ({ doc }) => {
+      ({ doc }) => {
         revalidatePath(`/posts/${doc.slug}`)
         revalidateTag('archives')
+        revalidateTag(`${doc.slug}-archive-en`)
+        revalidateTag(`${doc.slug}-archive-es`)
+        revalidateTag(`${doc.slug}-archive-fr`)
       },
     ],
   },

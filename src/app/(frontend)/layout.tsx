@@ -7,6 +7,7 @@ import { Providers } from '@providers/index'
 import { PrivacyProvider } from '@root/providers/Privacy/index'
 import { mergeOpenGraph } from '@root/seo/mergeOpenGraph'
 import { GeistMono } from 'geist/font/mono'
+import { NextIntlClientProvider } from 'next-intl'
 import React from 'react'
 
 import { untitledSans } from './fonts'
@@ -31,11 +32,13 @@ export default function RootLayout({
           <UmamiAnalytics />
         </head>
         <body className={[GeistMono.variable, untitledSans.variable].join(' ')}>
-          <GoogleTagManager />
-          <Providers>
-            {children}
-            <PrivacyBanner />
-          </Providers>
+          <NextIntlClientProvider>
+            <GoogleTagManager />
+            <Providers>
+              {children}
+              <PrivacyBanner />
+            </Providers>
+          </NextIntlClientProvider>
         </body>
       </PrivacyProvider>
     </html>

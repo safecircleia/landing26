@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://payloadcms.com
+Host: https://safecircle.tech
 
 # Sitemaps
-Sitemap: https://payloadcms.com/sitemap.xml
+Sitemap: https://safecircle.tech/sitemap.xml

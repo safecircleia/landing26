@@ -35,7 +35,7 @@ export const fetchGlobals = async (
   topBar: TopBar
 }> => {
   const payload = await getPayload({ config })
-  const availableLocales = (config.localization?.locales || ['en']) as TypedLocale[]
+  const availableLocales = ['en', 'es', 'fr'] as TypedLocale[]
   const mainMenu = await payload.findGlobal({
     slug: 'main-menu',
     depth: 1,
@@ -64,8 +64,7 @@ export const fetchGlobals = async (
 }
 
 // helper: get available locales without fetching globals
-export const getAvailableLocales = (): TypedLocale[] =>
-  (config.localization?.locales || ['en']) as TypedLocale[]
+export const getAvailableLocales = (): TypedLocale[] => ['en', 'es', 'fr'] as TypedLocale[]
 
 export const fetchPage = async (
   incomingSlugSegments: string | string[],
@@ -217,35 +216,50 @@ export const fetchArchive = async (
   const payload = await getPayload({ config })
   const currentDate = new Date()
 
-  const data = await payload.find({
+  // First, get the category
+  const categoryData = await payload.find({
     collection: 'categories',
-    depth: 2,
+    depth: 0,
     draft,
-    joins: {
-      posts: {
-        sort: '-publishedOn',
-        where: {
-          and: [
-            { publishedOn: { less_than_equal: currentDate } },
-            { _status: { equals: 'published' } },
-          ],
-        },
-      },
-    },
     limit: 1,
-    locale, // added
+    locale,
     select: {
+      id: true,
       name: true,
       slug: true,
       description: true,
       headline: true,
-      posts: true,
     },
     where: {
       and: [{ slug: { equals: slug } }],
     },
   })
-  return data.docs[0]
+
+  const category = categoryData.docs[0]
+  if (!category) {
+    return {}
+  }
+
+  // Then, fetch posts for this category
+  const postsData = await payload.find({
+    collection: 'posts',
+    depth: 2,
+    draft,
+    locale,
+    sort: '-publishedOn',
+    where: {
+      and: [
+        { category: { equals: category.id } },
+        { publishedOn: { less_than_equal: currentDate } },
+        { _status: { equals: 'published' } },
+      ],
+    },
+  })
+
+  return {
+    ...category,
+    posts: { docs: postsData.docs },
+  }
 }
 
 export const fetchArchives = async (

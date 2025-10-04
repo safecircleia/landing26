@@ -1,4 +1,5 @@
 import type { Category } from '@root/payload-types'
+import type { TypedLocale } from 'payload'
 
 import { BackgroundGrid } from '@components/BackgroundGrid'
 import { BackgroundScanline } from '@components/BackgroundScanline'
@@ -19,10 +20,12 @@ const Navigation = ({
   archives,
   category,
   className,
+  locale,
 }: {
   archives: Partial<Category>[]
   category: Category['slug']
   className?: string
+  locale: TypedLocale
 }) => {
   return (
     <nav className={className}>
@@ -32,31 +35,36 @@ const Navigation = ({
             className={[classes.tab, slug == category ? classes.active : '']
               .filter(Boolean)
               .join(' ')}
-            href={`/posts/${slug}`}
+            href={`/${locale}/posts/${slug}`}
             key={slug}
           >
             {name}
           </Link>
         )
       })}
-      <Link href="/case-studies">
+      <Link href={`/${locale}/case-studies`}>
         Case Studies <ArrowIcon />
       </Link>
     </nav>
   )
 }
 
-export const Archive: React.FC<{ category: Category['slug'] }> = async ({ category }) => {
+export const Archive: React.FC<{ category: Category['slug']; locale: TypedLocale }> = async ({
+  category,
+  locale,
+}) => {
   const { isEnabled: draft } = await draftMode()
-  const getArchive = draft ? fetchArchive : unstable_cache(fetchArchive, [`${category}-archive`])
+  const getArchive = draft
+    ? fetchArchive
+    : unstable_cache(fetchArchive, [`${category}-archive-${locale}`])
   const getArchives = draft
     ? fetchArchives
-    : unstable_cache(fetchArchives, [`archives`], {
+    : unstable_cache(fetchArchives, [`archives-${locale}`], {
         tags: ['archives'],
       })
 
-  const archive = await getArchive(category)
-  const archives = await getArchives()
+  const archive = await getArchive(category, draft, locale)
+  const archives = await getArchives(undefined, locale)
 
   const { description, headline } = archive
   const posts = archive.posts?.docs || []
@@ -68,9 +76,14 @@ export const Archive: React.FC<{ category: Category['slug'] }> = async ({ catego
       <div className={classes.navigation}>
         <span className={classes.breadcrumbsLabel}>Posts</span>
         <MobileNav className={classes.mobileNav} currentCategory={archive.name ?? ''}>
-          <Navigation archives={archives} category={category} />
+          <Navigation archives={archives} category={category} locale={locale} />
         </MobileNav>
-        <Navigation archives={archives} category={category} className={classes.desktopNav} />
+        <Navigation
+          archives={archives}
+          category={category}
+          className={classes.desktopNav}
+          locale={locale}
+        />
       </div>
       <BlockWrapper padding={{ bottom: 'large', top: 'small' }} settings={{}}>
         <BackgroundGrid zIndex={-1} />
@@ -90,7 +103,7 @@ export const Archive: React.FC<{ category: Category['slug'] }> = async ({ catego
             </div>
           </div>
           {latestPost && typeof latestPost !== 'string' && (
-            <FeaturedBlogPost {...latestPost} category={category} />
+            <FeaturedBlogPost {...latestPost} category={category} locale={locale} />
           )}
           {posts && Array.isArray(posts) && posts.length > 0 ? (
             <div className={[classes.cardGrid, 'grid'].filter(Boolean).join(' ')}>
@@ -110,7 +123,7 @@ export const Archive: React.FC<{ category: Category['slug'] }> = async ({ catego
                       <div className={['cols-8 cols-m-8'].filter(Boolean).join(' ')} key={post.id}>
                         <ContentMediaCard
                           authors={post.authors}
-                          href={`/posts/${category}/${post.slug}`}
+                          href={`/${locale}/posts/${category}/${post.slug}`}
                           media={thumbnailAsset ?? ''}
                           publishedOn={post.publishedOn}
                           title={post.title}

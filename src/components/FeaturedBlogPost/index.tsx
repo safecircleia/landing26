@@ -1,4 +1,5 @@
 import type { Post } from '@root/payload-types'
+import type { TypedLocale } from 'payload'
 
 import { BackgroundScanline } from '@components/BackgroundScanline/index'
 import { Media } from '@components/Media/index'
@@ -8,7 +9,9 @@ import * as React from 'react'
 
 import classes from './index.module.scss'
 
-export const FeaturedBlogPost: React.FC<{ category: string } & Partial<Post>> = (props) => {
+export const FeaturedBlogPost: React.FC<
+  { category: string; locale?: TypedLocale } & Partial<Post>
+> = (props) => {
   const {
     slug,
     authors,
@@ -16,13 +19,14 @@ export const FeaturedBlogPost: React.FC<{ category: string } & Partial<Post>> = 
     dynamicThumbnail,
     featuredMedia,
     image,
+    locale = 'en',
     meta,
     publishedOn,
     thumbnail,
     title,
   } = props
 
-  const href = `/posts/${category}/${slug}`
+  const href = `/${locale}/posts/${category}/${slug}`
 
   const author =
     authors && authors[0] && typeof authors[0] !== 'string'

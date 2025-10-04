@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { TypedLocale } from 'payload'
 
 import BreadcrumbsBar from '@components/Hero/BreadcrumbsBar/index'
 import { PayloadRedirects } from '@components/PayloadRedirects/index'
@@ -8,25 +9,32 @@ import { fetchBlogPost, fetchPosts } from '@data'
 import { mergeOpenGraph } from '@root/seo/mergeOpenGraph'
 import { unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
+import { setRequestLocale } from 'next-intl/server'
 import React from 'react'
 
-const getPost = async (slug, category, draft?) =>
+const getPost = async (slug, category, locale: TypedLocale = 'en', draft?) =>
   draft
-    ? await fetchBlogPost(slug, category)
-    : await unstable_cache(fetchBlogPost, ['blogPost', `post-${slug}`])(slug, category)
+    ? await fetchBlogPost(slug, category, locale)
+    : await unstable_cache(fetchBlogPost, ['blogPost', `post-${slug}-${locale}`])(
+        slug,
+        category,
+        locale,
+      )
 
 const PostPage = async ({
   params,
 }: {
   params: Promise<{
     category: string
-    slug: any
+    locale: TypedLocale
+    slug: string
   }>
 }) => {
   const { isEnabled: draft } = await draftMode()
-  const { slug, category } = await params
+  const { slug, category, locale = 'en' } = await params
 
-  const blogPost = await getPost(slug, category, draft)
+  setRequestLocale(locale)
+  const blogPost = await getPost(slug, category, locale, draft)
 
   const url = `/${category}/${slug}`
 
@@ -47,21 +55,35 @@ const PostPage = async ({
 export default PostPage
 
 export async function generateStaticParams() {
-  const getPosts = unstable_cache(fetchPosts, ['allPosts'])
-  const posts = await getPosts()
+  const locales = ['en', 'es', 'fr'] as const
+  const allParams: {
+    category: string
+    locale: 'en' | 'es' | 'fr'
+    slug: string
+  }[] = []
 
-  return posts
-    .map(({ slug, category }) => {
-      if (!category || typeof category === 'string' || !category.slug) {
-        return null
-      }
+  for (const locale of locales) {
+    const getPosts = unstable_cache(fetchPosts, ['allPosts', locale])
+    const posts = await getPosts(locale)
 
-      return {
-        slug,
-        category: category.slug,
-      }
-    })
-    .filter(Boolean)
+    const localeParams = posts
+      .map(({ slug, category }) => {
+        if (!category || typeof category === 'string' || !category.slug || !slug) {
+          return null
+        }
+
+        return {
+          slug,
+          category: category.slug,
+          locale,
+        }
+      })
+      .filter((param): param is NonNullable<typeof param> => param !== null)
+
+    allParams.push(...localeParams)
+  }
+
+  return allParams
 }
 
 export async function generateMetadata({
@@ -69,12 +91,13 @@ export async function generateMetadata({
 }: {
   params: Promise<{
     category: string
+    locale: TypedLocale
     slug: string
   }>
 }): Promise<Metadata> {
   const { isEnabled: draft } = await draftMode()
-  const { slug, category } = await params
-  const post = await getPost(slug, category, draft)
+  const { slug, category, locale = 'en' } = await params
+  const post = await getPost(slug, category, locale, draft)
 
   let ogImage: null | string = null
 

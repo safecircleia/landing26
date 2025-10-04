@@ -8,16 +8,17 @@ import { useAuth } from '@root/providers/Auth/index'
 import { useHeaderObserver } from '@root/providers/HeaderIntersectionObserver/index'
 import { useStarCount } from '@root/utilities/use-star-count'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 import * as React from 'react'
 
 import { FullLogo } from '../../../graphics/FullLogo/index'
 import { CMSLink } from '../../CMSLink/index'
-import { DocSearch } from '../Docsearch/index'
 import classes from './index.module.scss'
 
 type DesktopNavType = { hideBackground?: boolean } & Pick<MainMenu, 'menuCta' | 'tabs'>
 export const DesktopNav: React.FC<DesktopNavType> = ({ hideBackground, menuCta, tabs }) => {
   const { user } = useAuth()
+  const locale = useLocale()
   const [activeTab, setActiveTab] = React.useState<number | undefined>()
   const [activeDropdown, setActiveDropdown] = React.useState<boolean | undefined>(false)
   const [backgroundStyles, setBackgroundStyles] = React.useState<any>({
@@ -115,7 +116,7 @@ export const DesktopNav: React.FC<DesktopNavType> = ({ hideBackground, menuCta, 
             <Link
               aria-label="Full SafeCircle Logo"
               className={classes.logo}
-              href="/"
+              href={`/${locale}`}
               prefetch={false}
             >
               <FullLogo className="w-auto h-[30px]" />

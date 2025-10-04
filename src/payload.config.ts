@@ -12,9 +12,6 @@ import {
   LinkFeature,
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
-import { en } from '@payloadcms/translations/languages/en'
-import { es } from '@payloadcms/translations/languages/es'
-import { fr } from '@payloadcms/translations/languages/fr'
 import link from '@root/fields/link'
 import { LabelFeature } from '@root/fields/richText/features/label/server'
 import { LargeBodyFeature } from '@root/fields/richText/features/largeBody/server'
@@ -80,7 +77,6 @@ import { TopBar } from './globals/TopBar'
 import { opsCounterPlugin } from './plugins/opsCounter'
 import redeployWebsite from './scripts/redeployWebsite'
 import { refreshMdxToLexical, syncDocs } from './scripts/syncDocs'
-
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -351,8 +347,8 @@ export default buildConfig({
           'VideoDrawer',
           'templateCards',
           'Code',
-          'downloadBlock',
           'commandLine',
+          'downloadBlock',
         ],
       }),
     ],
@@ -390,10 +386,6 @@ export default buildConfig({
   globals: [Footer, MainMenu, GetStarted, PartnerProgram, TopBar],
   graphQL: {
     disablePlaygroundInProduction: false,
-  },
-  i18n: {
-    fallbackLanguage: 'en',
-    supportedLanguages: { en, es, fr },
   },
   localization: {
     defaultLocale: 'en', // required

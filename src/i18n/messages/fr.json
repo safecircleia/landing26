@@ -1,0 +1,23 @@
+{
+  "date-published": "Date de publication",
+  "author": "Auteur",
+  "page-not-found": "Cette page n'a pas pu être trouvée.",
+  "go-home": "Retour à l'accueil",
+  "loading": "Chargement, veuillez patienter...",
+  "posts": "Articles",
+  "post": "Article",
+  "showing": "Affichage",
+  "of": "de",
+  "search": "Rechercher",
+  "dashboard": "Tableau de bord",
+  "previous": "Précédent",
+  "next": "Suivant",
+  "more-pages": "Plus de pages",
+  "community-guide": "Guide Communautaire",
+  "official-guide": "Guide Officiel",
+  "read-time": "min de lecture",
+  "published-on": "Publié le",
+  "related-posts": "Articles Connexes",
+  "share-article": "Partager cet article",
+  "back-to-posts": "Retour aux articles"
+}

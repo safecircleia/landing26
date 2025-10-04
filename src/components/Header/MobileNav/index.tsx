@@ -28,7 +28,6 @@ export const subMenuSlug = 'mobile-sub-menu'
 type NavItems = Pick<MainMenu, 'menuCta' | 'tabs'>
 
 const MobileNavItems = ({ setActiveTab, tabs }) => {
-  const { user } = useAuth()
   const { openModal } = useModal()
   const handleOnClick = (index) => {
     openModal(subMenuSlug)
@@ -76,11 +75,6 @@ const MobileNavItems = ({ setActiveTab, tabs }) => {
           )
         }
       })}
-      {/* {!user && (
-        <Link className={classes.mobileMenuItem} href="/login" prefetch={false}>
-          Login
-        </Link>
-      )} */}
       <CrosshairIcon
         className={[classes.crosshair, classes.crosshairTopLeft].filter(Boolean).join(' ')}
         size="large"
@@ -282,7 +276,6 @@ export const MobileNav: React.FC<NavItems> = (props) => {
                   <GitHubIcon />
                   {starCount}
                 </a>
-                {user && <Avatar className={classes.avatar} />}
                 <DocSearch />
                 <div
                   aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}

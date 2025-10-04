@@ -1,6 +1,7 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 import path from 'path'
 import { fileURLToPath } from 'node:url'
+import createNextIntlPlugin from 'next-intl/plugin'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -11,6 +12,8 @@ import bundleAnalyzer from '@next/bundle-analyzer'
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
+
+const withNextIntl = createNextIntlPlugin()
 
 const localhost = process.env.NEXT_PUBLIC_IS_LIVE
   ? []
@@ -166,4 +169,4 @@ const nextConfig = withBundleAnalyzer({
   },
 })
 
-export default withPayload(nextConfig, { devBundleServerPackages: false })
+export default withNextIntl(withPayload(nextConfig))

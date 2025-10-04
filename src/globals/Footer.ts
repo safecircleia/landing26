@@ -19,6 +19,7 @@ export const Footer: GlobalConfig = {
         {
           name: 'label',
           type: 'text',
+          localized: true,
           required: true,
         },
         {

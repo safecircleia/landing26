@@ -11,11 +11,12 @@ import { Video } from '@components/RichText/Video/index'
 import { ArrowRightIcon } from '@icons/ArrowRightIcon/index'
 import { getVideo } from '@root/utilities/get-video'
 import { formatDate } from '@utilities/format-date-time'
+import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
 import { AuthorsList, GuestAuthorList } from './AuthorsList/index'
 import classes from './index.module.scss'
-export const Post: React.FC<Partial<PostType>> = (props) => {
+export const Post: React.FC<Partial<PostType>> = async (props) => {
   const {
     authorType,
     category,
@@ -30,6 +31,8 @@ export const Post: React.FC<Partial<PostType>> = (props) => {
     title,
     videoUrl,
   } = props
+
+  const t = await getTranslations()
 
   return (
     <div className={classes.post} id="blog">
@@ -79,9 +82,9 @@ export const Post: React.FC<Partial<PostType>> = (props) => {
                 {typeof category !== 'string' &&
                   category?.slug === 'guides' &&
                   (authorType === 'guest' ? (
-                    <span className={classes.guideBadge}>Community Guide</span>
+                    <span className={classes.guideBadge}>{t('community-guide')}</span>
                   ) : (
-                    <span className={classes.guideBadge}>Official Guide</span>
+                    <span className={classes.guideBadge}>{t('official-guide')}</span>
                   ))}
               </div>
               <div className={classes.mobileAuthor}>
