@@ -14,14 +14,12 @@
 }
 
 .layout--vertical {
-  :local() {
-    .ul {
-      flex-direction: column;
-    }
+  .ul {
+    flex-direction: column;
+  }
 
-    .li {
-      gap: 1rem;
-    }
+  .li {
+    gap: 1rem;
   }
 }
 

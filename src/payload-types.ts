@@ -116,7 +116,6 @@ export interface Config {
   };
   collections: {
     'case-studies': CaseStudy;
-    'community-help': CommunityHelp;
     docs: Doc;
     media: Media;
     pages: Page;
@@ -146,7 +145,6 @@ export interface Config {
   };
   collectionsSelect: {
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
-    'community-help': CommunityHelpSelect<false> | CommunityHelpSelect<true>;
     docs: DocsSelect<false> | DocsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
@@ -227,7 +225,7 @@ export interface BlogContent {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -322,7 +320,7 @@ export interface Callout {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -365,7 +363,7 @@ export interface Cta {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -492,7 +490,7 @@ export interface Page {
         root: {
           type: string;
           children: {
-            type: string;
+            type: any;
             version: number;
             [k: string]: unknown;
           }[];
@@ -537,7 +535,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -552,7 +550,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -596,7 +594,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -611,7 +609,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -703,7 +701,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -783,7 +781,7 @@ export interface Post {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -810,7 +808,7 @@ export interface Post {
             root: {
               type: string;
               children: {
-                type: string;
+                type: any;
                 version: number;
                 [k: string]: unknown;
               }[];
@@ -905,7 +903,7 @@ export interface Code {
             root: {
               type: string;
               children: {
-                type: string;
+                type: any;
                 version: number;
                 [k: string]: unknown;
               }[];
@@ -956,7 +954,7 @@ export interface CaseStudy {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1043,7 +1041,7 @@ export interface Partner {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1058,7 +1056,7 @@ export interface Partner {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1073,7 +1071,7 @@ export interface Partner {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1194,7 +1192,7 @@ export interface CardGrid {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1286,7 +1284,7 @@ export interface CaseStudyCards {
             root: {
               type: string;
               children: {
-                type: string;
+                type: any;
                 version: number;
                 [k: string]: unknown;
               }[];
@@ -1323,7 +1321,7 @@ export interface CaseStudiesHighlight {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1403,7 +1401,7 @@ export interface CodeFeature {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1452,7 +1450,7 @@ export interface CodeFeature {
                   root: {
                     type: string;
                     children: {
-                      type: string;
+                      type: any;
                       version: number;
                       [k: string]: unknown;
                     }[];
@@ -1513,7 +1511,7 @@ export interface Content {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1529,7 +1527,7 @@ export interface Content {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1544,7 +1542,7 @@ export interface Content {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1559,7 +1557,7 @@ export interface Content {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1594,7 +1592,7 @@ export interface ContentGrid {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1636,7 +1634,7 @@ export interface ContentGrid {
             root: {
               type: string;
               children: {
-                type: string;
+                type: any;
                 version: number;
                 [k: string]: unknown;
               }[];
@@ -1672,7 +1670,7 @@ export interface FormBlock {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -1731,7 +1729,7 @@ export interface Form {
               root: {
                 type: string;
                 children: {
-                  type: string;
+                  type: any;
                   version: number;
                   [k: string]: unknown;
                 }[];
@@ -1814,7 +1812,7 @@ export interface Form {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1846,7 +1844,7 @@ export interface Form {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -1887,7 +1885,7 @@ export interface HoverCards {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -2058,7 +2056,7 @@ export interface LogoGrid {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -2120,7 +2118,7 @@ export interface MediaBlock {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -2161,7 +2159,7 @@ export interface MediaContent {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -2238,7 +2236,7 @@ export interface MediaContentAccordion {
             root: {
               type: string;
               children: {
-                type: string;
+                type: any;
                 version: number;
                 [k: string]: unknown;
               }[];
@@ -2380,7 +2378,7 @@ export interface ReusableContent {
             root: {
               type: string;
               children: {
-                type: string;
+                type: any;
                 version: number;
                 [k: string]: unknown;
               }[];
@@ -2444,7 +2442,7 @@ export interface ComparisonTableType {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -2485,7 +2483,7 @@ export interface ExampleTabsBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -2502,7 +2500,7 @@ export interface ExampleTabsBlock {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -2537,7 +2535,7 @@ export interface Slider {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -2627,7 +2625,7 @@ export interface Statement {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -2692,7 +2690,7 @@ export interface StepsBlock {
         root: {
           type: string;
           children: {
-            type: string;
+            type: any;
             version: number;
             [k: string]: unknown;
           }[];
@@ -2730,7 +2728,7 @@ export interface StickyHighlights {
             root: {
               type: string;
               children: {
-                type: string;
+                type: any;
                 version: number;
                 [k: string]: unknown;
               }[];
@@ -2772,7 +2770,7 @@ export interface StickyHighlights {
                   root: {
                     type: string;
                     children: {
-                      type: string;
+                      type: any;
                       version: number;
                       [k: string]: unknown;
                     }[];
@@ -2826,7 +2824,7 @@ export interface Doc {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -2891,6 +2889,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -3016,7 +3021,7 @@ export interface UploadBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -3066,7 +3071,7 @@ export interface RestExamplesBlock {
             root: {
               type: string;
               children: {
-                type: string;
+                type: any;
                 version: number;
                 [k: string]: unknown;
               }[];
@@ -3105,7 +3110,7 @@ export interface SpotlightBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -3190,7 +3195,7 @@ export interface BannerBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -3237,33 +3242,6 @@ export interface CodeBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Code';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "community-help".
- */
-export interface CommunityHelp {
-  id: string;
-  title?: string | null;
-  communityHelpType?: ('discord' | 'github') | null;
-  githubID?: string | null;
-  discordID?: string | null;
-  communityHelpJSON:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  introDescription?: string | null;
-  slug?: string | null;
-  helpful?: boolean | null;
-  relatedDocs?: (string | Doc)[] | null;
-  threadCreatedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3320,10 +3298,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'case-studies';
         value: string | CaseStudy;
-      } | null)
-    | ({
-        relationTo: 'community-help';
-        value: string | CommunityHelp;
       } | null)
     | ({
         relationTo: 'docs';
@@ -3451,24 +3425,6 @@ export interface CaseStudiesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "community-help_select".
- */
-export interface CommunityHelpSelect<T extends boolean = true> {
-  title?: T;
-  communityHelpType?: T;
-  githubID?: T;
-  discordID?: T;
-  communityHelpJSON?: T;
-  introDescription?: T;
-  slug?: T;
-  helpful?: T;
-  relatedDocs?: T;
-  threadCreatedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3802,6 +3758,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4227,7 +4190,7 @@ export interface MainMenu {
                   root: {
                     type: string;
                     children: {
-                      type: string;
+                      type: any;
                       version: number;
                       [k: string]: unknown;
                     }[];
@@ -4335,7 +4298,7 @@ export interface GetStarted {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -4355,7 +4318,7 @@ export interface GetStarted {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -4417,7 +4380,7 @@ export interface PartnerProgram {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];

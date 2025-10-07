@@ -5,10 +5,8 @@
   height: 0.6rem;
   overflow: visible;
 
-  :global() {
-    path {
-      vector-effect: non-scaling-stroke;
-    }
+  :global(path) {
+    vector-effect: non-scaling-stroke;
   }
 }
 
@@ -48,10 +46,8 @@
 }
 
 .bold {
-  &:local() {
-    .stroke {
-      stroke-width: 2px;
-    }
+  .stroke {
+    stroke-width: 2px;
   }
 }
 

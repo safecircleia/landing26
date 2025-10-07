@@ -1,6 +1,6 @@
 import { revalidateRedirects } from '@hooks/revalidateRedirects'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { resendAdapter } from '@payloadcms/email-resend'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
@@ -51,7 +51,6 @@ import { Steps } from './blocks/Steps'
 import { StickyHighlights } from './blocks/StickyHighlights'
 import { CaseStudies } from './collections/CaseStudies'
 import { Categories } from './collections/Categories'
-import { CommunityHelp } from './collections/CommunityHelp'
 import { Docs } from './collections/Docs'
 import { BannerBlock } from './collections/Docs/blocks/banner'
 import { CodeBlock } from './collections/Docs/blocks/code'
@@ -269,7 +268,6 @@ export default buildConfig({
   ],
   collections: [
     CaseStudies,
-    CommunityHelp,
     Docs,
     Media,
     Pages,
@@ -354,18 +352,23 @@ export default buildConfig({
       }),
     ],
   }),
-  email: nodemailerAdapter({
-    defaultFromAddress: 'hello@safecircle.tech',
-    defaultFromName: 'SafeCircle',
-    // Nodemailer transportOptions
-    transportOptions: {
-      auth: {
-        pass: process.env.SMTP_PASS,
-        user: process.env.SMTP_USER,
-      },
-      host: process.env.SMTP_HOST,
-      port: 587,
-    },
+  // email: nodemailerAdapter({
+  //   defaultFromAddress: 'hello@safecircle.tech',
+  //   defaultFromName: 'SafeCircle',
+  //   // Nodemailer transportOptions
+  //   transportOptions: {
+  //     auth: {
+  //       pass: process.env.SMTP_PASS,
+  //       user: process.env.SMTP_USER,
+  //     },
+  //     host: process.env.SMTP_HOST,
+  //     port: 587,
+  //   },
+  // }),
+  email: resendAdapter({
+    apiKey: process.env.RESEND_API_KEY || '',
+    defaultFromAddress: 'hello@notify.safecircle.tech',
+    defaultFromName: 'SafeCircle no-reply',
   }),
   endpoints: [
     {
