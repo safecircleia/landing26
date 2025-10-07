@@ -4,14 +4,17 @@ import { BackgroundScanline } from '@components/BackgroundScanline'
 import { Media } from '@components/Media'
 import { ArrowIcon } from '@root/icons/ArrowIcon'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 
 import classes from './index.module.scss'
 
 type PartnerCardProps = Partner
 
 export const PartnerCard = (partner: PartnerCardProps) => {
+  const locale = useLocale()
+
   return (
-    <Link className={classes.partnerCard} href={`/partners/${partner.slug}`}>
+    <Link className={classes.partnerCard} href={`/${locale}/partners/${partner.slug}`}>
       <div className={classes.partnerCardImage}>
         {typeof partner.content.bannerImage !== 'string' && (
           <Media resource={partner.content.bannerImage} />

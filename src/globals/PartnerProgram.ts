@@ -32,6 +32,7 @@ export const PartnerProgram: GlobalConfig = {
           name: 'richText',
           type: 'richText',
           label: 'Hero Text',
+          localized: true,
         },
         linkGroup({
           appearances: false,
@@ -54,6 +55,7 @@ export const PartnerProgram: GlobalConfig = {
         {
           name: 'description',
           type: 'textarea',
+          localized: true,
         },
         {
           name: 'partners',

@@ -74,6 +74,7 @@ import { GetStarted } from './globals/GetStarted'
 import { MainMenu } from './globals/MainMenu'
 import { PartnerProgram } from './globals/PartnerProgram'
 import { TopBar } from './globals/TopBar'
+import localization from './i18n/localization'
 import { opsCounterPlugin } from './plugins/opsCounter'
 import redeployWebsite from './scripts/redeployWebsite'
 import { refreshMdxToLexical, syncDocs } from './scripts/syncDocs'
@@ -387,24 +388,25 @@ export default buildConfig({
   graphQL: {
     disablePlaygroundInProduction: false,
   },
-  localization: {
-    defaultLocale: 'en', // required
-    fallback: true, // defaults to true
-    locales: [
-      {
-        code: 'en',
-        label: 'English',
-      },
-      {
-        code: 'es',
-        label: 'Spanish',
-      },
-      {
-        code: 'fr',
-        label: 'French',
-      },
-    ],
-  },
+  // localization: {
+  //   defaultLocale: 'en', // required
+  //   fallback: true, // defaults to true
+  //   locales: [
+  //     {
+  //       code: 'en',
+  //       label: 'English',
+  //     },
+  //     {
+  //       code: 'es',
+  //       label: 'Spanish',
+  //     },
+  //     {
+  //       code: 'fr',
+  //       label: 'French',
+  //     },
+  //   ],
+  // },
+  localization,
   plugins: [
     opsCounterPlugin({
       max: 200,

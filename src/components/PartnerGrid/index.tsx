@@ -1,3 +1,5 @@
+'use client'
+
 import type { Partner } from '@root/payload-types'
 
 import { PartnerCard } from '@components/cards/PartnerCard'
@@ -11,12 +13,13 @@ type PartnerGridProps = {
 
 export const PartnerGrid = (props: PartnerGridProps) => {
   const { featured, partners } = props
+
   return (
     <div className={classes.PartnerGridWrap}>
       {partners.map((partner) => {
         return (
           typeof partner !== 'string' && (
-            <PartnerCard {...partner} key={partner.id + featured ? '_featured' : ''} />
+            <PartnerCard {...partner} key={partner.id + (featured ? '_featured' : '')} />
           )
         )
       })}

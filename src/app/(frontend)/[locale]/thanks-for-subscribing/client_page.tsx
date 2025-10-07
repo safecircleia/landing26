@@ -11,7 +11,7 @@ export const ThanksForSubscribingPage = () => {
         <div className={['cols-12'].filter(Boolean).join(' ')}>
           <h1>Subscribed</h1>
           <LargeBody>
-            Thank you for subscribing. You will now receive regular Payload updates to your email.
+            Thank you for subscribing. You will now receive regular SafeCircle updates to your email.
           </LargeBody>
           <br />
           <Button appearance="secondary" el="link" href="/" label="Back Home" />

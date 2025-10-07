@@ -8,6 +8,7 @@ import { Gutter } from '@components/Gutter'
 import { PartnerGrid } from '@components/PartnerGrid'
 import { ChevronDownIcon } from '@root/icons/ChevronDownIcon'
 import { CloseIcon } from '@root/icons/CloseIcon'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 
 import classes from './index.module.scss'
@@ -29,6 +30,7 @@ export const PartnerDirectory: React.FC<{
   partnerList: FilterablePartner[]
 }> = (props) => {
   const { filterOptions, partnerList } = props
+  const t = useTranslations()
 
   const [filters, setFilters] = useState<{
     budgets: string[]
@@ -135,23 +137,24 @@ export const PartnerDirectory: React.FC<{
     <BlockWrapper settings={{ theme: 'dark' }}>
       <Gutter className={['grid', classes.partnerDirectory].join(' ')}>
         <div className={['cols-16', classes.directoryHeader].join(' ')}>
-          <h2>All Partners</h2>
+          <h2>{t('all-partners')}</h2>
           <h4>
-            {filteredPartners.length} result{filteredPartners.length === 1 ? '' : 's'}
+            {filteredPartners.length} {filteredPartners.length === 1 ? t('result') : t('results')}
           </h4>
         </div>
         <div className={['cols-4 cols-m-8', classes.sidebar].join(' ')}>
           <div className={classes.filterHeader}>
             <button
-              aria-label="Show Filters"
+              aria-label={t('show-filters')}
               className={classes.filterToggle}
               onClick={() => toggleFilterGroup()}
+              type="button"
             >
               <CloseIcon className={openFilters ? classes.openToggle : ''} />
             </button>
-            <span>Filters</span>
-            <button disabled={!hasFilters} onClick={() => handleReset()}>
-              Clear
+            <span>{t('filters')}</span>
+            <button disabled={!hasFilters} onClick={() => handleReset()} type="button">
+              {t('clear')}
             </button>
           </div>
           <div
@@ -210,6 +213,7 @@ const FilterGroup: React.FC<{
   validOptions?: string[]
 }> = (props) => {
   const { filters, group, handleFilters, options, validOptions } = props
+  const t = useTranslations()
 
   const [open, setOpen] = useState(true)
 
@@ -220,19 +224,21 @@ const FilterGroup: React.FC<{
         onClick={() => {
           setOpen(!open)
         }}
+        type="button"
       >
-        {group.charAt(0).toUpperCase() + group.slice(1) + ' '}
-        {filters.length > 0 && <div className={classes.pill}>{filters.length}</div>}
+        {t(group)} {filters.length > 0 && <div className={classes.pill}>{filters.length}</div>}
         <ChevronDownIcon className={classes.chevron} size="small" />
       </button>
       <div className={classes.checkboxes}>
         {options
           .sort((a, b) => a.value.localeCompare(b.value))
           .map((option) => (
-            <label key={option.id}>
+            <label htmlFor={`${group}-${option.value}`} key={option.id}>
               <input
+                aria-label={option.name}
                 checked={filters.includes(option.value)}
-                disabled={validOptions?.includes(option.value) ? false : true}
+                disabled={validOptions ? !validOptions.includes(option.value) : false}
+                id={`${group}-${option.value}`}
                 name={option.value}
                 onChange={(e) => handleFilters(group, option.value, e.target.checked)}
                 type="checkbox"

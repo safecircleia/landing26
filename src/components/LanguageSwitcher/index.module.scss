@@ -1,0 +1,61 @@
+@use '@scss/common' as *;
+
+$curve: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+.selectContainer {
+  --theme-icon-width: 2rem;
+  --theme-switcher-icon-width: 2rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--theme-elevation-500);
+  cursor: pointer;
+  width: 100%;
+
+  select {
+    @include body;
+    & {
+      all: unset;
+      position: relative;
+      border-top: 1px solid var(--grid-line-dark);
+      border-bottom: 1px solid var(--grid-line-dark);
+      width: 100%;
+      padding: 1rem 1.5rem;
+      padding-left: calc(1.5rem + var(--theme-icon-width));
+    }
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1px;
+    z-index: 0;
+    height: 100%;
+    width: calc(100% - 2px);
+    background: var(--color-base-1000);
+  }
+}
+
+.switcherIcon {
+  display: inline-flex;
+  height: 1rem;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 1.25rem;
+}
+
+.languageIcon {
+  width: var(--theme-icon-width);
+}
+
+.upDownChevronIcon {
+  width: var(--theme-switcher-icon-width);
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0;
+  pointer-events: none;
+}

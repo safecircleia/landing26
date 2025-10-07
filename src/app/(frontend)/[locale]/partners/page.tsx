@@ -1,4 +1,5 @@
 import type { Metadata } from 'next/types'
+import type { TypedLocale } from 'payload'
 
 import { BackgroundGrid } from '@components/BackgroundGrid'
 import { BlockWrapper } from '@components/BlockWrapper'
@@ -11,21 +12,40 @@ import { fetchFilters, fetchPartnerProgram, fetchPartners } from '@data'
 import { unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 import classes from './index.module.scss'
 
-export const metadata: Metadata = {
-  description:
-    'Connect with a SafeCircle expert to help you.',
-  title: 'Find a SafeCircle Partner',
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: TypedLocale }>
+}): Promise<Metadata> {
+  const { locale = 'en' } = await params
+  const t = await getTranslations({ locale })
+
+  return {
+    description: t('connect-with-expert'),
+    title: t('find-safecircle-partner'),
+  }
 }
 
-export default async function Partners() {
+export default async function Partners({
+  params,
+}: {
+  params: Promise<{
+    locale: TypedLocale
+  }>
+}) {
+  const { locale = 'en' } = await params
   const { isEnabled: draft } = await draftMode()
 
+  setRequestLocale(locale)
+  const t = await getTranslations({ locale })
+
   const getPartnerProgram = draft
-    ? fetchPartnerProgram
-    : unstable_cache(fetchPartnerProgram, ['partnerProgram'])
+    ? () => fetchPartnerProgram(locale)
+    : unstable_cache(() => fetchPartnerProgram(locale), [`partnerProgram-${locale}`])
   const partnerProgram = await getPartnerProgram()
 
   if (!partnerProgram) {
@@ -33,7 +53,9 @@ export default async function Partners() {
   }
   const { contentBlocks, featuredPartners } = partnerProgram
 
-  const getPartners = draft ? fetchPartners : unstable_cache(fetchPartners, ['partners'])
+  const getPartners = draft
+    ? () => fetchPartners(locale)
+    : unstable_cache(() => fetchPartners(locale), [`partners-${locale}`])
   const partners = await getPartners()
   const partnerList = partners.map((partner) => {
     return {
@@ -53,7 +75,9 @@ export default async function Partners() {
     }
   })
 
-  const getFilters = draft ? fetchFilters : unstable_cache(fetchFilters, ['filters'])
+  const getFilters = draft
+    ? () => fetchFilters(locale)
+    : unstable_cache(() => fetchFilters(locale), [`filters-${locale}`])
   const filters = await getFilters()
 
   const filterOptions = {
@@ -76,13 +100,13 @@ export default async function Partners() {
       <BreadcrumbsBar
         breadcrumbs={[
           {
-            label: 'Agency Partners',
+            label: t('agency-partners'),
           },
         ]}
         links={[
           {
-            label: 'Become a Partner',
-            url: '/partners',
+            label: t('become-a-partner'),
+            url: `/${locale}/partners`,
           },
         ]}
       />
@@ -90,7 +114,7 @@ export default async function Partners() {
         {featuredPartners && (
           <div className={[classes.featuredPartnersWrapper, 'cols-16'].join(' ')}>
             <div className={[classes.featuredPartnersHeader, 'cols-16 grid'].join(' ')}>
-              <h2 className="cols-12 cols-m-8">Featured Partners</h2>
+              <h2 className="cols-12 cols-m-8">{t('featured-partners')}</h2>
               <p className="cols-4 start-13 cols-m-8 start-m-1">{featuredPartners.description}</p>
             </div>
             <PartnerGrid featured partners={featuredPartners.partners} />

@@ -6,14 +6,10 @@ import type { Footer as FooterType } from '@types'
 import { BackgroundGrid } from '@components/BackgroundGrid/index'
 import { CMSLink } from '@components/CMSLink/index'
 import { Gutter } from '@components/Gutter/index'
+import { LanguageSwitcher } from '@components/LanguageSwitcher/index'
 import { NewsletterSignUp } from '@components/NewsletterSignUp'
 import Payload3D from '@components/Payload3D/index'
-import { Text } from '@forms/fields/Text/index'
-import FormComponent from '@forms/Form/index'
-import { validateEmail } from '@forms/validations'
-import { ArrowIcon } from '@icons/ArrowIcon/index'
 import { DiscordIcon } from '@root/graphics/DiscordIcon/index'
-import { FacebookIcon } from '@root/graphics/FacebookIcon/index'
 import { InstagramIcon } from '@root/graphics/InstagramIcon/index'
 import { ThemeAutoIcon } from '@root/graphics/ThemeAutoIcon/index'
 import { ThemeDarkIcon } from '@root/graphics/ThemeDarkIcon/index'
@@ -24,7 +20,8 @@ import { ChevronUpDownIcon } from '@root/icons/ChevronUpDownIcon/index'
 import { useHeaderObserver } from '@root/providers/HeaderIntersectionObserver/index'
 import { useThemePreference } from '@root/providers/Theme/index'
 import { getImplicitPreference, themeLocalStorageKey } from '@root/providers/Theme/shared'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import React, { useId } from 'react'
 
 import classes from './index.module.scss'
@@ -34,6 +31,7 @@ export const Footer: React.FC<FooterType> = (props) => {
   const [products, developers, company] = columns ?? []
   const { setTheme } = useThemePreference()
   const { setHeaderTheme } = useHeaderObserver()
+  const t = useTranslations()
   const wrapperRef = React.useRef<HTMLElement>(null)
   const selectRef = React.useRef<HTMLSelectElement>(null)
 
@@ -128,7 +126,7 @@ export const Footer: React.FC<FooterType> = (props) => {
           </div>
 
           <div className={['cols-4 cols-m-4 cols-s-8'].filter(Boolean).join(' ')}>
-            <p className={`${classes.colHeader} ${classes.thirdColumn}`}>Stay connected</p>
+            <p className={`${classes.colHeader} ${classes.thirdColumn}`}>{t('stay-connected')}</p>
             <NewsletterSignUp />
 
             <div className={classes.socialLinks}>
@@ -196,6 +194,8 @@ export const Footer: React.FC<FooterType> = (props) => {
                 className={`${classes.switcherIcon} ${classes.upDownChevronIcon}`}
               />
             </div>
+
+            <LanguageSwitcher />
           </div>
         </div>
       </Gutter>

@@ -1,3 +1,6 @@
+import type { Metadata } from 'next'
+import type { TypedLocale } from 'payload'
+
 import { BackgroundGrid } from '@components/BackgroundGrid'
 import { BackgroundScanline } from '@components/BackgroundScanline'
 import { CMSForm } from '@components/CMSForm'
@@ -15,17 +18,24 @@ import { unstable_cache } from 'next/cache'
 import { draftMode } from 'next/headers'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import React from 'react'
 
 import classes from './index.module.scss'
 
-const getPartner = (slug, draft) =>
-  draft ? fetchPartner(slug) : unstable_cache(fetchPartner, [`partner-${slug}`])(slug)
+const getPartner = (slug: string, draft: boolean, locale: TypedLocale) =>
+  draft
+    ? fetchPartner(slug, locale)
+    : unstable_cache(() => fetchPartner(slug, locale), [`partner-${slug}-${locale}`])()
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: TypedLocale; slug: string }>
+}): Promise<Metadata> {
   const { isEnabled: draft } = await draftMode()
-  const { slug } = await params
-  const partner = await getPartner(slug, draft)
+  const { slug, locale = 'en' } = await params
+  const partner = await getPartner(slug, draft, locale)
 
   if (!partner) {
     return notFound()
@@ -37,11 +47,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-export default async function PartnerPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function PartnerPage({
+  params,
+}: {
+  params: Promise<{ locale: TypedLocale; slug: string }>
+}) {
   const { isEnabled: draft } = await draftMode()
-  const { slug } = await params
-  const partner = await getPartner(slug, draft)
-  const getPartnerProgram = unstable_cache(fetchPartnerProgram, ['partnerProgram'])
+  const { slug, locale = 'en' } = await params
+
+  setRequestLocale(locale)
+  const t = await getTranslations({ locale })
+
+  const partner = await getPartner(slug, draft, locale)
+  const getPartnerProgram = unstable_cache(
+    () => fetchPartnerProgram(locale),
+    [`partnerProgram-${locale}`],
+  )
   const partnerProgram = await getPartnerProgram()
 
   if (!partner) {
@@ -62,8 +83,8 @@ export default async function PartnerPage({ params }: { params: Promise<{ slug: 
       <BreadcrumbsBar
         breadcrumbs={[
           {
-            label: 'Partners',
-            url: '/partners',
+            label: t('partners'),
+            url: `/${locale}/partners`,
           },
           {
             label: partner.name,

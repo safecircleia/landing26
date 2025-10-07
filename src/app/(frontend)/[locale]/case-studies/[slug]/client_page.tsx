@@ -11,12 +11,14 @@ import { RenderBlocks } from '@components/RenderBlocks/index'
 import { RichText } from '@components/RichText/index'
 import { ArrowIcon } from '@icons/ArrowIcon'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 import React from 'react'
 
 import classes from './index.module.scss'
 
 export const CaseStudy: React.FC<CaseStudyT> = (props) => {
   const { featuredImage, industry, introContent, layout, partner, title, url, useCase } = props
+  const locale = useLocale()
 
   return (
     <React.Fragment>
@@ -69,7 +71,7 @@ export const CaseStudy: React.FC<CaseStudyT> = (props) => {
                   {partner && typeof partner !== 'string' && (
                     <Link
                       className={[classes.metaItem].filter(Boolean).join(' ')}
-                      href={'/partners/' + partner.slug}
+                      href={`/${locale}/partners/${partner.slug}`}
                     >
                       <p className={[classes.metaLabel].filter(Boolean).join(' ')}>Partner</p>
                       <p className={[classes.metaValue].filter(Boolean).join(' ')}>
