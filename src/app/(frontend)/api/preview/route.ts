@@ -1,16 +1,10 @@
+import type { NextRequest } from 'next/server'
+
 import { payloadToken } from '@data/token'
 import { cookies, draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-export async function GET(
-  req: {
-    cookies: {
-      get: (name: string) => {
-        value: string
-      }
-    }
-  } & Request,
-): Promise<Response> {
+export async function GET(req: NextRequest): Promise<Response> {
   const cookieStore = await cookies()
   const token = cookieStore.get(payloadToken)
   const { searchParams } = new URL(req.url)
@@ -22,7 +16,7 @@ export async function GET(
   }
 
   if (!token) {
-    new Response('No token. You are not allowed to preview this page', { status: 403 })
+    return new Response('No token. You are not allowed to preview this page', { status: 403 })
   }
 
   // validate the Payload token

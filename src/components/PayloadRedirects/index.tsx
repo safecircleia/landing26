@@ -35,14 +35,14 @@ export const PayloadRedirects: React.FC<Props> = async ({ disableNotFound, url }
           ? '/blog/'
           : redirectItem.to?.reference?.relationTo === 'case-studies'
             ? '/case-studies/'
-            : `${'breadcrumbs' in document && document.breadcrumbs?.at(-1)?.url}`
+            : `${'breadcrumbs' in document && document.breadcrumbs?.[document.breadcrumbs?.length - 1]?.url}`
     } else {
       redirectUrl =
         redirectItem.to?.reference?.relationTo === 'posts'
           ? `/blog/${redirectItem.to?.reference?.value?.slug}`
           : redirectItem.to?.reference?.relationTo === 'case-studies'
             ? `/case-studies/${redirectItem.to?.reference?.value?.slug}`
-            : `${redirectItem.to?.reference?.value?.breadcrumbs?.at(-1)?.url}`
+            : `${redirectItem.to?.reference?.value?.breadcrumbs?.[redirectItem.to?.reference?.value?.breadcrumbs?.length - 1]?.url}`
     }
 
     if (redirectUrl) {

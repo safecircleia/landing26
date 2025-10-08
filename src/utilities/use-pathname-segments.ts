@@ -9,8 +9,8 @@ export const usePathnameSegments = (): string[] => {
     return []
   }
 
-  pathname = pathname.at(0) === '/' ? pathname.slice(1) : pathname
-  pathname = pathname.at(-1) === '/' ? pathname.slice(0, -1) : pathname
+  pathname = pathname[0] === '/' ? pathname.slice(1) : pathname
+  pathname = pathname[pathname.length - 1] === '/' ? pathname.slice(0, -1) : pathname
 
   return pathname.split('/')
 }

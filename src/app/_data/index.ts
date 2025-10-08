@@ -8,7 +8,6 @@ import type {
   Budget,
   CaseStudy,
   Category,
-  CommunityHelp,
   Footer,
   Form,
   GetStarted,
@@ -78,7 +77,7 @@ export const fetchPage = async (
     : incomingSlugSegments
       ? [incomingSlugSegments]
       : ['home']
-  const slug = slugSegments.at(-1)
+  const slug = slugSegments[slugSegments.length - 1]
 
   const data = await payload.find({
     collection: 'pages',
@@ -385,64 +384,6 @@ export const fetchCaseStudy = async (
   })
 
   return data.docs[0]
-}
-
-export const fetchCommunityHelps = async (
-  communityHelpType: CommunityHelp['communityHelpType'],
-  locale: TypedLocale = 'en',
-): Promise<Pick<CommunityHelp, 'slug'>[]> => {
-  const payload = await getPayload({ config })
-
-  const data = await payload.find({
-    collection: 'community-help',
-    depth: 0,
-    limit: 0,
-    locale, // added
-    select: { slug: true },
-    where: {
-      and: [{ communityHelpType: { equals: communityHelpType } }, { helpful: { equals: true } }],
-    },
-  })
-
-  return data.docs
-}
-
-export const fetchCommunityHelp = async (
-  slug: string,
-  locale: TypedLocale = 'en',
-): Promise<CommunityHelp> => {
-  const payload = await getPayload({ config })
-
-  const data = await payload.find({
-    collection: 'community-help',
-    limit: 1,
-    locale, // added
-    where: { slug: { equals: slug } },
-  })
-
-  return data.docs[0]
-}
-
-export const fetchRelatedThreads = async (
-  path: string,
-  locale: TypedLocale = 'en',
-): Promise<Partial<CommunityHelp>[]> => {
-  const payload = await getPayload({ config })
-
-  const data = await payload.find({
-    collection: 'community-help',
-    depth: 0,
-    limit: 3,
-    locale, // added
-    select: {
-      slug: true,
-      communityHelpType: true,
-      title: true,
-    },
-    where: { 'relatedDocs.path': { equals: path } },
-  })
-
-  return data.docs
 }
 
 export const fetchPartners = async (locale: TypedLocale = 'en'): Promise<Partner[]> => {
