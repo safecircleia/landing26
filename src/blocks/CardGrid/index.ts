@@ -32,11 +32,13 @@ export const CardGrid: Block = {
             {
               name: 'title',
               type: 'text',
+              localized: true,
               required: true,
             },
             {
               name: 'description',
               type: 'textarea',
+              localized: true,
             },
             {
               name: 'enableLink',
@@ -52,7 +54,6 @@ export const CardGrid: Block = {
               },
             }),
           ],
-          localized: true,
         },
       ],
     }),
