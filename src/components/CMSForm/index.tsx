@@ -79,7 +79,8 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
           const hubspotCookie = getCookie('hubspotutk')
           const pageUri = `${process.env.NEXT_PUBLIC_SITE_URL}${pathname}`
           const slugParts = pathname?.split('/')
-          const pageName = slugParts?.[slugParts.length - 1] === '' ? 'Home' : slugParts?.[slugParts.length - 1]
+          const pageName =
+            slugParts?.[slugParts.length - 1] === '' ? 'Home' : slugParts?.[slugParts.length - 1]
           const req = await fetch('/api/form-submissions', {
             body: JSON.stringify({
               form: formID,

@@ -250,7 +250,8 @@ const PartnerDetails = (partner) => {
         <h6>Budget</h6>
         {sortedBudgets[0].name.split('–')[0] +
           '–' +
-          (sortedBudgets[sortedBudgets.length - 1].name.split('–')[1] ?? sortedBudgets[sortedBudgets.length - 1].name)}
+          (sortedBudgets[sortedBudgets.length - 1].name.split('–')[1] ??
+            sortedBudgets[sortedBudgets.length - 1].name)}
       </div>
       {social.length > 0 && (
         <div className={classes.sidebarGroup}>
