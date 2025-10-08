@@ -82,7 +82,7 @@ export const fetchPage = async (
 
   const data = await payload.find({
     collection: 'pages',
-    depth: 2,
+    depth: 3,
     draft,
     limit: 1,
     locale, // added

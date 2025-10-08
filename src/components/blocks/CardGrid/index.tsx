@@ -11,7 +11,7 @@ import { SquareCard } from '@components/cards/SquareCard/index'
 import { CMSLink } from '@components/CMSLink/index'
 import { Gutter } from '@components/Gutter/index'
 import { RichText } from '@components/RichText/index'
-import React, { useState } from 'react'
+import React from 'react'
 
 import classes from './index.module.scss'
 
@@ -21,16 +21,25 @@ export type CardGridProps = {
 } & Extract<Page['layout'][0], { blockType: 'cardGrid' }>
 
 export const CardGrid: React.FC<CardGridProps> = (props) => {
-  const {
-    cardGridFields: { cards, links, revealDescription, richText, settings },
-    hideBackground,
-    padding,
-  } = props
+  const { cardGridFields, hideBackground, padding } = props
 
-  const [index, setIndex] = useState(0)
+  // Early return if cardGridFields is missing
+  if (!cardGridFields) {
+    return null
+  }
 
-  const cardLength = cards?.length ?? 0
-  const hasCards = Array.isArray(cards) && cardLength > 0
+  // Safely destructure with fallbacks
+  const rawCards = cardGridFields.cards ?? []
+  const links = cardGridFields.links ?? []
+  const revealDescription = cardGridFields.revealDescription ?? false
+  const richText = cardGridFields.richText
+  const settings = cardGridFields.settings
+
+  // Filter out null/undefined cards
+  const cards = Array.isArray(rawCards) ? rawCards.filter((card) => card != null) : []
+
+  const cardLength = cards.length
+  const hasCards = cardLength > 0
   const hasLinks = Array.isArray(links) && links.length > 0
   const excessLength = cardLength > 4 ? 8 - cardLength : 4 - cardLength
 
@@ -92,14 +101,14 @@ export const CardGrid: React.FC<CardGridProps> = (props) => {
               style={wrapperStyle}
             >
               {cards.map((card, index) => {
+                // Skip null or undefined cards
+                if (!card) {
+                  return null
+                }
+
                 const { description, enableLink, link, title } = card
                 return (
-                  <div
-                    className={'cols-4 cols-s-8'}
-                    key={index}
-                    onMouseEnter={() => setIndex(index + 1)}
-                    onMouseLeave={() => setIndex(0)}
-                  >
+                  <div className={'cols-4 cols-s-8'} key={index}>
                     <SquareCard
                       className={classes.card}
                       description={description}
