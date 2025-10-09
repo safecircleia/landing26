@@ -41,6 +41,7 @@ const localhost = process.env.NEXT_PUBLIC_IS_LIVE
     ]
 
 const nextConfig = withBundleAnalyzer({
+  output: 'standalone', // Enable Docker-friendly standalone build
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -83,10 +84,6 @@ const nextConfig = withBundleAnalyzer({
         protocol: 'https',
         hostname: 'img.youtube.com',
         port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: process.env.BLOB_STORE_ID,
       },
     ].filter(Boolean),
   },
