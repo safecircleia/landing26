@@ -30,3 +30,15 @@ jobs:
             ghcr.io/safecircleia/landing26:latest
             ghcr.io/safecircleia/landing26:${{ github.sha }}
           platforms: linux/amd64
+          secrets: |
+            PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
+            DATABASE_URI=${{ secrets.DATABASE_URI }}
+            NODE_ENV=${{ secrets.NODE_ENV }}
+            NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            NEXT_PUBLIC_CMS_URL=${{ secrets.NEXT_PUBLIC_CMS_URL }}
+            SITEMAP_URL=${{ secrets.SITEMAP_URL }}
+            NEXT_PUBLIC_NEWSLETTER_FORM_ID=${{ secrets.NEXT_PUBLIC_NEWSLETTER_FORM_ID }}
+            NEXT_PUBLIC_TURNSTILE_SITE_KEY=${{ secrets.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+            NEXT_PRIVATE_TURNSTILE_SECRET_KEY=${{ secrets.NEXT_PRIVATE_TURNSTILE_SECRET_KEY }}
+            RESEND_AUDIENCE_ID=${{ secrets.RESEND_AUDIENCE_ID }}
+            RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
