@@ -30,7 +30,7 @@ jobs:
             ghcr.io/safecircleia/landing26:latest
             ghcr.io/safecircleia/landing26:${{ github.sha }}
           platforms: linux/amd64
-          secrets: |
+          build-args: |
             PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
             DATABASE_URI=${{ secrets.DATABASE_URI }}
             NODE_ENV=${{ secrets.NODE_ENV }}
