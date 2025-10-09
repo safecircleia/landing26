@@ -305,7 +305,7 @@ export default buildConfig({
               type: 'text',
               label: ({ t }) => t('fields:enterURL'),
               required: true,
-              validate: (value: string, options) => {
+              validate: (_value: string, _options) => {
                 return
               },
             } as TextField,
@@ -420,14 +420,6 @@ export default buildConfig({
         fields: ({ defaultFields }) => [
           ...defaultFields,
           {
-            name: 'hubSpotFormID',
-            type: 'text',
-            admin: {
-              position: 'sidebar',
-            },
-            label: 'HubSpot Form ID',
-          },
-          {
             name: 'customID',
             type: 'text',
             admin: {
@@ -449,6 +441,7 @@ export default buildConfig({
           afterChange: [
             ({ doc }) => {
               revalidateTag(`form-${doc.title}`)
+              // eslint-disable-next-line no-console
               console.log(`Revalidated form: ${doc.title}`)
             },
           ],
@@ -499,39 +492,48 @@ export default buildConfig({
 
               const body = req.json ? await req.json() : {}
 
-              const sendSubmissionToHubSpot = async (): Promise<void> => {
-                const { form, submissionData } = doc
-                const portalID = process.env.NEXT_PRIVATE_HUBSPOT_PORTAL_KEY
-                const data = {
-                  context: {
-                    ...('hubspotCookie' in body && { hutk: body?.hubspotCookie }),
-                    pageName: 'pageName' in body ? body?.pageName : '',
-                    pageUri: 'pageUri' in body ? body?.pageUri : '',
-                  },
-                  fields: submissionData.map((key) => ({
-                    name: key.field,
-                    value: key.value,
-                  })),
+              const addToResendNewsletter = async (): Promise<void> => {
+                const { addToNewsletterAudience, shouldAddToNewsletter } = await import(
+                  './utilities/resend-newsletter'
+                )
+                const { submissionData } = doc
+
+                if (!submissionData || !Array.isArray(submissionData)) {
+                  return
                 }
-                try {
-                  await fetch(
-                    `https://api.hsforms.com/submissions/v3/integration/submit/${portalID}/${form.hubSpotFormID}`,
-                    {
-                      body: JSON.stringify(data),
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      method: 'POST',
-                    },
-                  )
-                } catch (err: unknown) {
-                  req.payload.logger.error({
-                    err,
-                    msg: 'Fetch to HubSpot form submissions failed',
-                  })
+
+                const newsletterData = shouldAddToNewsletter(submissionData)
+
+                if (newsletterData.shouldAdd && newsletterData.email) {
+                  try {
+                    const result = await addToNewsletterAudience({
+                      email: newsletterData.email,
+                      firstName: newsletterData.firstName,
+                      lastName: newsletterData.lastName,
+                      pageName: 'pageName' in body ? body?.pageName : undefined,
+                      pageUri: 'pageUri' in body ? body?.pageUri : undefined,
+                      source: 'form-submission',
+                    })
+
+                    if (result.success) {
+                      req.payload.logger.info(
+                        `Successfully added ${newsletterData.email} to newsletter`,
+                      )
+                    } else {
+                      req.payload.logger.warn(
+                        `Failed to add ${newsletterData.email} to newsletter: ${result.error}`,
+                      )
+                    }
+                  } catch (err: unknown) {
+                    req.payload.logger.error({
+                      err,
+                      msg: 'Failed to add contact to Resend newsletter',
+                    })
+                  }
                 }
               }
-              await sendSubmissionToHubSpot()
+
+              await addToResendNewsletter()
             },
           ],
         },

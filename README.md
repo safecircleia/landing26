@@ -13,7 +13,7 @@ A modern, high-performance landing page built with **Next.js 15**, **Payload CMS
 - **Rich Content Blocks**: Modular content system with 30+ reusable blocks (CallToAction, CardGrid, MediaContent, Pricing, etc.)
 - **Documentation System**: Dynamic docs rendering from MDX/Markdown with automatic conversion to Lexical editor format
 - **SEO Optimized**: Built-in SEO plugin, sitemap generation, and structured data
-- **Form Builder**: Advanced form system with Cloudflare Turnstile verification and HubSpot integration
+- **Form Builder**: Advanced form system with Cloudflare Turnstile verification and Resend newsletter integration
 - **Multi-language Support**: Internationalization ready with English, Spanish, and French locales
 - **Partner Management**: Complete partner directory with filterable categories
 - **Case Studies**: Showcase customer success stories with rich media and parallax effects
@@ -42,21 +42,14 @@ A modern, high-performance landing page built with **Next.js 15**, **Payload CMS
 - **Faceless UI** - Custom UI components (Grid, Modal, Slider, Collapsibles)
 - **Geist Font** - Modern typography
 
-### Search & Discovery
-- **Algolia** - Instant search with React InstantSearch
-- **@docsearch/react** - Documentation search widget
-
 ### Forms & Validation
 - **Payload Form Builder Plugin** - Dynamic form generation
 - **Cloudflare Turnstile** - Bot protection via @marsidev/react-turnstile
 - **React Select** - Enhanced select components
 
 ### Integrations
-- **Stripe** - Payment processing for SaaS features
-- **HubSpot** - Form submission tracking
-- **Nodemailer** - Email with SendGrid transport
-- **Vercel Blob Storage** - Asset storage
-- **Facebook Pixel** - Analytics tracking
+- **Resend** - Email services and newsletter management
+- **Umami** - Analytics tracking
 
 ### Developer Experience
 - **ESLint** - Code linting with Payload ESLint config
@@ -120,7 +113,7 @@ This project uses **Payload CMS** as a headless CMS, providing:
 - **Global Configs**: Main Menu, Footer, Top Bar, Partner Program, Get Started
 - **Custom Blocks**: 30+ reusable content blocks for flexible page building
 - **Rich Text Editor**: Lexical-based editor with custom features (labels, large body, tables, uploads)
-- **Form Builder**: Dynamic form creation with validation and HubSpot integration
+- **Form Builder**: Dynamic form creation with validation and Resend newsletter integration
 - **Nested Docs**: Hierarchical documentation structure
 - **SEO Management**: Built-in SEO fields and metadata generation
 - **Redirects**: Automatic redirect management
@@ -172,8 +165,9 @@ This project uses **Payload CMS** as a headless CMS, providing:
    BLOB_READ_WRITE_TOKEN=your-token
    BLOB_STORE_ID=your-store-id
    
-   # Optional: HubSpot
-   NEXT_PRIVATE_HUBSPOT_PORTAL_KEY=your-portal-key
+   # Resend email and newsletter
+   RESEND_API_KEY=your-resend-api-key
+   RESEND_AUDIENCE_ID=your-audience-id
    
    # Optional: Cloudflare Turnstile
    NEXT_PRIVATE_TURNSTILE_SECRET_KEY=your-secret
@@ -314,10 +308,10 @@ Custom API endpoints are available for various operations:
 
 ## 🎯 Key Features Explained
 
-### Form Builder with HubSpot Integration
+### Form Builder with Resend Newsletter Integration
 - Custom form builder plugin
 - Cloudflare Turnstile bot protection
-- Automatic HubSpot submission
+- Automatic Resend newsletter subscription
 - Custom validation and field types
 
 ### SEO Optimization

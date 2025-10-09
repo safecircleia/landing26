@@ -3,8 +3,7 @@ import FormComponent from '@forms/Form/index'
 import { validateEmail } from '@forms/validations'
 import { ArrowIcon } from '@root/icons/ArrowIcon'
 import { ErrorIcon } from '@root/icons/ErrorIcon'
-import { getCookie } from '@root/utilities/get-cookie'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import React, { useId } from 'react'
 import { toast } from 'sonner'
 
@@ -19,7 +18,7 @@ interface NewsletterSignUpProps {
 export const NewsletterSignUp: React.FC<NewsletterSignUpProps> = (props) => {
   const { className, description = false, placeholder = 'Enter your email' } = props
 
-  const [buttonClicked, setButtonClicked] = React.useState(false)
+  const [_buttonClicked, setButtonClicked] = React.useState(false)
   const [formData, setFormData] = React.useState({ email: '' })
   const [error, setError] = React.useState<{ message: string; status?: string } | undefined>()
 
@@ -27,7 +26,6 @@ export const NewsletterSignUp: React.FC<NewsletterSignUpProps> = (props) => {
 
   const newsletterId = useId()
   const pathname = usePathname()
-  const router = useRouter()
 
   React.useEffect(() => {
     const buttonElement = submitButtonRef.current
@@ -58,7 +56,6 @@ export const NewsletterSignUp: React.FC<NewsletterSignUpProps> = (props) => {
 
       try {
         const formID = process.env.NEXT_PUBLIC_NEWSLETTER_FORM_ID
-        const hubspotCookie = getCookie('hubspotutk')
         const pageUri = `${process.env.NEXT_PUBLIC_SITE_URL}${pathname}`
         const slugParts = pathname?.split('/')
         const pageName =
@@ -67,7 +64,6 @@ export const NewsletterSignUp: React.FC<NewsletterSignUpProps> = (props) => {
           fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/form-submissions`, {
             body: JSON.stringify({
               form: formID,
-              hubspotCookie,
               pageName,
               pageUri,
               submissionData: [{ field: 'email', value: formData.email }],
@@ -92,7 +88,7 @@ export const NewsletterSignUp: React.FC<NewsletterSignUpProps> = (props) => {
       }
     }
     void submitForm()
-  }, [pathname, formData, router])
+  }, [pathname, formData])
 
   return (
     <div className={[className, classes.newsletterSignUp].filter(Boolean).join(' ')}>

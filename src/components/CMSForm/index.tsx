@@ -6,7 +6,6 @@ import { RichText } from '@components/RichText/index'
 import Form from '@forms/Form/index'
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { CrosshairIcon } from '@root/icons/CrosshairIcon/index'
-import { getCookie } from '@root/utilities/get-cookie'
 import { usePathname, useRouter } from 'next/navigation'
 import * as React from 'react'
 import { toast } from 'sonner'
@@ -76,7 +75,6 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
         }))
 
         try {
-          const hubspotCookie = getCookie('hubspotutk')
           const pageUri = `${process.env.NEXT_PUBLIC_SITE_URL}${pathname}`
           const slugParts = pathname?.split('/')
           const pageName =
@@ -84,7 +82,6 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
           const req = await fetch('/api/form-submissions', {
             body: JSON.stringify({
               form: formID,
-              hubspotCookie,
               pageName,
               pageUri,
               submissionData: dataToSend,
@@ -143,7 +140,7 @@ const RenderForm = ({ form, hiddenFields }: { form: FormType; hiddenFields: stri
         }
       }
 
-      submitForm()
+      void submitForm()
     },
     [router, formID, formRedirect, confirmationType, pathname],
   )

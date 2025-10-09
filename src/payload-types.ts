@@ -1858,7 +1858,6 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
-  hubSpotFormID?: string | null;
   /**
    * Attached to submission button to track clicks
    */
@@ -3991,7 +3990,6 @@ export interface FormsSelect<T extends boolean = true> {
         message?: T;
         id?: T;
       };
-  hubSpotFormID?: T;
   customID?: T;
   requireTurnstile?: T;
   updatedAt?: T;
