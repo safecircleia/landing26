@@ -16,6 +16,9 @@ RESEND_API_KEY=re_xxxxxxxxxxxxxxxxx
 
 # Resend Audience ID - The ID of your newsletter audience in Resend
 RESEND_AUDIENCE_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
+# From Email Address - The email address that newsletter emails will be sent from
+RESEND_FROM_EMAIL=noreply@yourdomain.com
 ```
 
 ### 2. Resend Dashboard Setup
@@ -32,6 +35,11 @@ RESEND_AUDIENCE_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
    - Give it a name (e.g., "Newsletter Subscribers")
    - Copy the Audience ID and add it to your environment variables
 
+4. **Configure From Email** (Optional):
+   - Add a `RESEND_FROM_EMAIL` environment variable with the email address you want to send from
+   - If not set, the system will default to `noreply@safecircle.com`
+   - Make sure the domain is verified in your Resend account
+
 ### 3. How It Works
 
 The integration automatically:
@@ -41,6 +49,7 @@ The integration automatically:
 3. **Adds to Audience**: Adds the contact to your Resend newsletter audience
 4. **Handles Duplicates**: Resend automatically handles duplicate contacts
 5. **Logs Activity**: All newsletter activity is logged through Payload's logger
+6. **New Post Notifications**: Automatically sends email notifications to all subscribers when a new blog post is published
 
 ### 4. Supported Form Fields
 
@@ -102,6 +111,31 @@ INFO: Successfully added user@example.com to newsletter
 WARN: Failed to add user@example.com to newsletter: API key not configured
 ```
 
+### 9. New Blog Post Email Notifications
+
+The system automatically sends email notifications to all newsletter subscribers when a new blog post is published. This happens when:
+
+- A new post is created with status "published"
+- An existing draft post is changed to "published" status
+
+The email includes:
+- **Modern Design**: Beautiful gradient header and responsive layout
+- **Post title and excerpt**: Prominently displayed with enhanced typography
+- **Author name(s)**: With emoji icons and proper styling
+- **Featured image**: Rounded corners and shadow effects (if available)
+- **Publication date**: Nicely formatted with calendar emoji
+- **Call-to-Action**: Eye-catching gradient button with hover effects
+- **Personalization**: Uses subscriber's first name with fallback
+- **Professional footer**: Complete with branding and unsubscribe option
+- **Mobile responsive**: Optimized for all screen sizes
+
+The system automatically handles:
+- Extracting plain text from rich text excerpts
+- Building correct post URLs with category slugs
+- Fetching author information (both team members and guest authors)
+- Getting featured image URLs
+- Error handling and logging
+
 ## API Reference
 
 ### `addToNewsletterAudience(data)`
@@ -115,6 +149,24 @@ Adds a contact to the Resend newsletter audience.
 - `data.source` (string, optional): Source of the subscription
 - `data.pageName` (string, optional): Page where form was submitted
 - `data.pageUri` (string, optional): Full URL where form was submitted
+
+**Returns:**
+```typescript
+Promise<{ error?: string; success: boolean }>
+```
+
+### `sendNewPostEmail(postData)`
+
+Sends a newsletter email to all subscribers when a new blog post is published.
+
+**Parameters:**
+- `postData.title` (string, required): Blog post title
+- `postData.slug` (string, required): Blog post slug for URL generation
+- `postData.excerpt` (string, optional): Blog post excerpt/summary
+- `postData.categorySlug` (string, optional): Category slug for URL generation
+- `postData.authorName` (string, optional): Author name(s)
+- `postData.publishedOn` (string, optional): Publication date
+- `postData.featuredImageUrl` (string, optional): Featured image URL
 
 **Returns:**
 ```typescript

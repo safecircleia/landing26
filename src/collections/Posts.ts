@@ -328,8 +328,123 @@ export const Posts: CollectionConfig = {
   },
   hooks: {
     afterChange: [
-      async ({ doc, previousDoc, req }) => {
+      async ({ doc, operation, previousDoc, req }) => {
         try {
+          // Handle newsletter email for newly published posts
+          if (operation === 'update' || operation === 'create') {
+            const isNowPublished = doc._status === 'published'
+            const wasPublished = previousDoc?._status === 'published'
+
+            // Send newsletter email if post is newly published (was draft/not published before)
+            if (isNowPublished && !wasPublished) {
+              // Import newsletter function dynamically to avoid circular imports
+              const { sendNewPostEmail } = await import('../utilities/resend-newsletter')
+
+              try {
+                // Get category slug
+                let categorySlug: string | undefined
+                if (doc.category) {
+                  const category = await req.payload.findByID({
+                    id: doc.category,
+                    collection: 'categories',
+                    select: {
+                      slug: true,
+                    },
+                  })
+                  categorySlug = category?.slug
+                }
+
+                // Get author name(s)
+                let authorName: string | undefined
+                if (doc.authorType === 'guest' && doc.guestAuthor) {
+                  authorName = doc.guestAuthor
+                } else if (doc.authors && Array.isArray(doc.authors) && doc.authors.length > 0) {
+                  const authorIds = doc.authors.map((author) =>
+                    typeof author === 'object' ? author.id : author,
+                  )
+                  const authors = await req.payload.find({
+                    collection: 'users',
+                    select: {
+                      firstName: true,
+                      lastName: true,
+                    },
+                    where: {
+                      id: {
+                        in: authorIds,
+                      },
+                    },
+                  })
+
+                  if (authors.docs.length > 0) {
+                    authorName = authors.docs
+                      .map((author) =>
+                        [author.firstName, author.lastName].filter(Boolean).join(' '),
+                      )
+                      .join(', ')
+                  }
+                }
+
+                // Get featured image URL
+                let featuredImageUrl: string | undefined
+                if (doc.image && typeof doc.image === 'object' && doc.image.url) {
+                  featuredImageUrl = doc.image.url
+                }
+
+                // Extract plain text from excerpt
+                let excerpt: string | undefined
+                if (doc.excerpt && Array.isArray(doc.excerpt) && doc.excerpt.length > 0) {
+                  // Simple extraction of text from rich text content
+                  const extractText = (nodes: unknown[]): string => {
+                    return nodes
+                      .map((node) => {
+                        if (node && typeof node === 'object') {
+                          const richTextNode = node as {
+                            children?: unknown[]
+                            text?: string
+                            type?: string
+                          }
+                          if (richTextNode.type === 'text') {
+                            return richTextNode.text || ''
+                          }
+                          if (richTextNode.children) {
+                            return extractText(richTextNode.children)
+                          }
+                        }
+                        return ''
+                      })
+                      .join('')
+                  }
+                  excerpt = extractText(doc.excerpt).trim()
+                }
+
+                // Send the newsletter email
+                const result = await sendNewPostEmail({
+                  slug: doc.slug,
+                  authorName,
+                  categorySlug,
+                  excerpt,
+                  featuredImageUrl,
+                  publishedOn: doc.publishedOn,
+                  title: doc.title,
+                })
+
+                if (result.success) {
+                  req.payload.logger.info(`Newsletter email sent for new post: ${doc.title}`)
+                } else {
+                  req.payload.logger.warn(
+                    `Failed to send newsletter email for post ${doc.title}: ${result.error}`,
+                  )
+                }
+              } catch (error) {
+                req.payload.logger.error(
+                  `Error sending newsletter email for post ${doc.title}:`,
+                  error,
+                )
+              }
+            }
+          }
+
+          // Existing revalidation logic
           if (doc.category) {
             const category = await req.payload.findByID({
               id: doc.category,
