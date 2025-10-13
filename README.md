@@ -1,9 +1,8 @@
-````markdown
 # SafeCircle Landing Page
 
 A modern, high-performance landing page built with **Next.js 15**, **Payload CMS**, and **TypeScript**. This project showcases enterprise-level web development practices including headless CMS integration, advanced content management, and SEO optimization.
 
-<img src="https://payloadcms.com/images/og-image.jpg" alt="SafeCircle landing page" />
+<img src="https://safecircle.tech/images/og-image.jpg" alt="SafeCircle landing page" />
 
 ## 🌟 Key Features
 
@@ -58,53 +57,6 @@ A modern, high-performance landing page built with **Next.js 15**, **Payload CMS
 - **Sharp** - High-performance image processing
 - **Next Bundle Analyzer** - Build size analysis
 
-## 📁 Project Structure
-
-```
-landing26/
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── (frontend)/        # Public-facing pages
-│   │   ├── (payload)/         # CMS admin routes
-│   │   └── api/               # API endpoints
-│   ├── blocks/                # Reusable content blocks
-│   │   ├── Banner/
-│   │   ├── BlogContent/
-│   │   ├── CallToAction/
-│   │   ├── CardGrid/
-│   │   ├── CaseStudyCards/
-│   │   ├── Pricing/
-│   │   └── ... (30+ blocks)
-│   ├── collections/           # Payload collections
-│   │   ├── CaseStudies.ts
-│   │   ├── Docs/
-│   │   ├── Media.ts
-│   │   ├── Pages.ts
-│   │   ├── Partners.ts
-│   │   ├── Posts.ts
-│   │   └── Users.ts
-│   ├── components/            # React components
-│   ├── fields/               # Custom Payload fields
-│   ├── globals/              # Global CMS configs
-│   │   ├── Footer.ts
-│   │   ├── MainMenu.ts
-│   │   └── TopBar.ts
-│   ├── hooks/                # React & Payload hooks
-│   ├── plugins/              # Custom Payload plugins
-│   ├── scripts/              # Utility scripts
-│   │   ├── syncDocs.ts       # GitHub docs sync
-│   │   └── redeployWebsite.ts
-│   └── payload.config.ts     # Payload configuration
-├── public/                    # Static assets
-│   ├── fonts/
-│   ├── images/
-│   └── robots.txt
-├── media/                     # Uploaded media files
-├── next.config.js            # Next.js configuration
-├── tsconfig.json             # TypeScript configuration
-└── package.json              # Dependencies
-```
-
 ## ⭐ Content Management System
 
 This project uses **Payload CMS** as a headless CMS, providing:
@@ -126,7 +78,6 @@ This project uses **Payload CMS** as a headless CMS, providing:
 - **Node.js** 18.x or higher
 - **pnpm** (recommended) or npm
 - **MongoDB** database (local or cloud instance)
-- Optional: **Vercel** account for blob storage
 
 ### Installation
 
@@ -341,58 +292,6 @@ Custom API endpoints are available for various operations:
 - Admin-only routes
 - Published-only content filtering
 - Role-based permissions
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. **Connect your repository to Vercel**
-2. **Configure environment variables** in Vercel dashboard
-3. **Deploy** - automatic deployments on push to main
-
-### Environment Variables for Production
-```env
-NEXT_PUBLIC_IS_LIVE=true
-DATABASE_URI=your-production-mongodb-uri
-PAYLOAD_SECRET=your-production-secret
-BLOB_STORAGE_ENABLED=true
-BLOB_READ_WRITE_TOKEN=your-vercel-token
-```
-
-### Build Command
-```bash
-pnpm build
-```
-
-### Start Command
-```bash
-pnpm start
-```
-
-## 🧪 Development Tips
-
-### Custom Aliases
-The project uses path aliases for cleaner imports:
-- `@scss` → `./src/css/`
-- `@components` → `./src/components.js`
-- `@blocks` → `./src/blocks`
-- `@providers` → `./src/providers`
-- `@icons` → `./src/icons`
-- `@utilities` → `./src/utilities`
-- `@types` → `./payload-types.ts`
-- `@graphics` → `./src/graphics`
-
-### Bundle Analysis
-Run bundle analysis to optimize build size:
-```bash
-ANALYZE=true pnpm build
-```
-
-### Content Security
-The site includes security headers:
-- `X-Frame-Options: SAMEORIGIN`
-- Content Security Policy for object/form restrictions
-- X-Robots-Tag for non-production environments
 
 ## 📖 Additional Resources
 
