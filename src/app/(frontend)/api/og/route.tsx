@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { ImageResponse } from 'next/og'
 import { NextResponse } from 'next/server'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export async function GET(req: NextRequest): Promise<ImageResponse> {
   try {

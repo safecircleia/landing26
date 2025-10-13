@@ -47,3 +47,8 @@ next-env.d.ts
 !/.idea/payload.iml
 
 /db/*
+
+# Open Next
+/.open-next/*
+
+/.wrangler/*

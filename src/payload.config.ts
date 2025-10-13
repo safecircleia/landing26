@@ -79,7 +79,8 @@ import redeployWebsite from './scripts/redeployWebsite'
 import { refreshMdxToLexical, syncDocs } from './scripts/syncDocs'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
+import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
+import { GetPlatformProxyOptions } from 'wrangler'
 // const sendGridAPIKey = process.env.SENDGRID_API_KEY
 
 // const sendgridConfig = {
@@ -87,6 +88,13 @@ const dirname = path.dirname(filename)
 //     apiKey: sendGridAPIKey,
 //   }),
 // }
+
+const cloudflareRemoteBindings = process.env.NODE_ENV === 'production'
+const cloudflare =
+  process.argv.find((value) => value.match(/^(generate|migrate):?/)) || !cloudflareRemoteBindings
+    ? await getCloudflareContextFromWrangler()
+    : await getCloudflareContext({ async: true })
+
 
 export default buildConfig({
   admin: {
@@ -563,3 +571,13 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
 })
+
+function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
+  return import(/* webpackIgnore: true */ `${'__wrangler'.replaceAll('_', '')}`).then(
+    ({ getPlatformProxy }) =>
+      getPlatformProxy({
+        environment: process.env.CLOUDFLARE_ENV,
+        experimental: { remoteBindings: cloudflareRemoteBindings },
+      } satisfies GetPlatformProxyOptions),
+  )
+}
