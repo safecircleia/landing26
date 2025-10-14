@@ -80,7 +80,6 @@ import { refreshMdxToLexical, syncDocs } from './scripts/syncDocs'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-
 export default buildConfig({
   admin: {
     components: {
@@ -556,4 +555,3 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
 })
-
