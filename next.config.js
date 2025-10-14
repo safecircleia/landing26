@@ -2,7 +2,7 @@ import { withPayload } from '@payloadcms/next/withPayload'
 import path from 'path'
 import { fileURLToPath } from 'node:url'
 import createNextIntlPlugin from 'next-intl/plugin'
-import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 import { redirects } from './redirects.js'
@@ -12,8 +12,6 @@ import bundleAnalyzer from '@next/bundle-analyzer'
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
-
-initOpenNextCloudflareForDev()
 
 const withNextIntl = createNextIntlPlugin()
 

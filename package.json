@@ -8,7 +8,7 @@
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "generate:llms": "payload run src/scripts/generateLLMs.ts",
-    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "build": "pnpm payload migrate && cross-env NODE_OPTIONS=--no-deprecation next build",
     "build:skipDocs": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "postbuild": "next-sitemap --config ./next-sitemap.config.cjs",
     "analyze": "ANALYZE=true next build",
@@ -16,11 +16,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier:fix": "prettier --write .",
-    "migrate-lexical-script": "payload run ./src/migrate.ts",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "migrate-lexical-script": "payload run ./src/migrate.ts"
   },
   "dependencies": {
     "@ai-stack/payloadcms": "3.2.20-beta",
@@ -33,7 +29,6 @@
     "@faceless-ui/slider": "2.0.0-beta.1",
     "@faceless-ui/window-info": "3.0.1",
     "@marsidev/react-turnstile": "^1.3.1",
-    "@opennextjs/cloudflare": "^1.10.1",
     "@openrouter/ai-sdk-provider": "^1.2.0",
     "@payloadcms/db-mongodb": "^3.59.0",
     "@payloadcms/email-resend": "^3.59.0",
@@ -101,8 +96,7 @@
     "dotenv": "^17.2.3",
     "eslint": "9.37.0",
     "prettier": "3.6.2",
-    "typescript": "5.9.3",
-    "wrangler": "^4.42.2"
+    "typescript": "5.9.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
