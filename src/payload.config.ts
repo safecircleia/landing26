@@ -24,7 +24,6 @@ import path from 'path'
 import { buildConfig, type TextField } from 'payload'
 import { fileURLToPath } from 'url'
 
-
 import { BlogContent } from './blocks/BlogContent'
 import { BlogMarkdown } from './blocks/BlogMarkdown'
 import { Callout } from './blocks/Callout'
