@@ -1,4 +1,8 @@
+import type { CloudflareContext } from '@opennextjs/cloudflare'
+import type { GetPlatformProxyOptions } from 'wrangler'
+
 import { revalidateRedirects } from '@hooks/revalidateRedirects'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { resendAdapter } from '@payloadcms/email-resend'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
@@ -77,8 +81,15 @@ import localization from './i18n/localization'
 import { opsCounterPlugin } from './plugins/opsCounter'
 import redeployWebsite from './scripts/redeployWebsite'
 import { refreshMdxToLexical, syncDocs } from './scripts/syncDocs'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const cloudflareRemoteBindings = process.env.NODE_ENV === 'production'
+const cloudflare =
+  process.argv.find((value) => value.match(/^(generate|migrate):?/)) || !cloudflareRemoteBindings
+    ? await getCloudflareContextFromWrangler()
+    : await getCloudflareContext({ async: true })
 
 export default buildConfig({
   admin: {
@@ -362,23 +373,6 @@ export default buildConfig({
     defaultFromAddress: 'hello@notify.safecircle.tech',
     defaultFromName: 'SafeCircle no-reply',
   }),
-  endpoints: [
-    {
-      handler: syncDocs,
-      method: 'get',
-      path: '/sync/docs',
-    },
-    {
-      handler: redeployWebsite,
-      method: 'post',
-      path: '/redeploy/website',
-    },
-    {
-      handler: refreshMdxToLexical,
-      method: 'get',
-      path: '/refresh/mdx-to-lexical',
-    },
-  ],
   globals: [Footer, MainMenu, GetStarted, PartnerProgram, TopBar],
   graphQL: {
     disablePlaygroundInProduction: false,
@@ -555,3 +549,13 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
 })
+
+function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
+  return import(/* webpackIgnore: true */ `${'__wrangler'.replaceAll('_', '')}`).then(
+    ({ getPlatformProxy }) =>
+      getPlatformProxy({
+        environment: process.env.CLOUDFLARE_ENV,
+        experimental: { remoteBindings: cloudflareRemoteBindings },
+      } satisfies GetPlatformProxyOptions),
+  )
+}
