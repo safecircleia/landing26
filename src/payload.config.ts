@@ -345,19 +345,6 @@ export default buildConfig({
       }),
     ],
   }),
-  // email: nodemailerAdapter({
-  //   defaultFromAddress: 'hello@safecircle.tech',
-  //   defaultFromName: 'SafeCircle',
-  //   // Nodemailer transportOptions
-  //   transportOptions: {
-  //     auth: {
-  //       pass: process.env.SMTP_PASS,
-  //       user: process.env.SMTP_USER,
-  //     },
-  //     host: process.env.SMTP_HOST,
-  //     port: 587,
-  //   },
-  // }),
   email: resendAdapter({
     apiKey: process.env.RESEND_API_KEY || '',
     defaultFromAddress: 'hello@notify.safecircle.tech',
@@ -367,24 +354,6 @@ export default buildConfig({
   graphQL: {
     disablePlaygroundInProduction: false,
   },
-  // localization: {
-  //   defaultLocale: 'en', // required
-  //   fallback: true, // defaults to true
-  //   locales: [
-  //     {
-  //       code: 'en',
-  //       label: 'English',
-  //     },
-  //     {
-  //       code: 'es',
-  //       label: 'Spanish',
-  //     },
-  //     {
-  //       code: 'fr',
-  //       label: 'French',
-  //     },
-  //   ],
-  // },
   localization,
   plugins: [
     opsCounterPlugin({
