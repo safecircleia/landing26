@@ -12,10 +12,10 @@ export const UmamiAnalytics: React.FC = () => {
   }
 
   return (
-    <Script
-      data-website-id="56bc82f8-7a54-4555-a9d9-4ee36bbbfe4c"
+    <script
+      data-site-id="05b59147cf14"
       defer
-      src="https://analytics.tomasps.com/script.js"
-    />
+      src="https://analytics.tomasps.com/api/script.js"
+    ></script>
   )
 }
